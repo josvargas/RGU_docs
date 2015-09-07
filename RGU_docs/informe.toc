@@ -1,0 +1,12 @@
+\select@language {spanish}
+\contentsline {chapter}{\'{I}ndice de figuras}{vi}
+\contentsline {chapter}{\IeC {\'I}ndice de tablas}{vii}
+\contentsline {chapter}{\chapternumberline {1}Introducci\IeC {\'o}n}{1}
+\contentsline {section}{\numberline {1.1}Justificaci\IeC {\'o}n}{1}
+\contentsline {section}{\numberline {1.2}Alcances del proyecto}{2}
+\contentsline {section}{\numberline {1.3}Objetivos}{2}
+\contentsline {subsection}{Objetivo general}{2}
+\contentsline {subsection}{Objetivos espec\IeC {\'\i }ficos}{2}
+\contentsline {section}{\numberline {1.4}Metodolog\IeC {\'\i }a}{2}
+\contentsline {section}{\numberline {1.5}Desarrollo}{3}
+\contentsline {chapter}{Bibliograf\'{\i }a}{5}

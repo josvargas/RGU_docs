@@ -1,0 +1,15 @@
+\begin{thebibliography}{}
+
+\bibitem[Nah et al., 2014]{Nah2014}
+Nah, J., KWON, H., Kim, D., Jeong, C., Park, J., HAN, T., Manocha, D., y Park,
+  W. (2014).
+\newblock Raycore: A ray-tracing hardware architecture for mobile devices.
+\newblock {\em ACM Transactions on Graphics, Vol. 33}.
+
+\bibitem[Schmittler et al., 2004]{Schmittler2004}
+Schmittler, J., Woop, S., Wagner, D., Paul, W., y Slusallek, P. (2004).
+\newblock Realtime ray tracing of dynamic scenes on an fpga chip.
+\newblock {\em Proceedings of the ACM SIGGRAPH/EUROGRAPHICS conference on
+  Graphics hardware}.
+
+\end{thebibliography}

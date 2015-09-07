@@ -1,0 +1,109 @@
+\chapter{Introducción}
+
+\section{Justificación}
+
+Parte de la metodología de aprendizaje del curso de Estructuras de computadores I contempla el uso de herramientas que permiten a los estudiantes poner en práctica sus conocimientos en programación de lenguaje ensamblador. Las herramientas que se utilizan actualmente son el \textit{SIS} y \textit{DroidBattles}, la primera  simula el procesador \textit{CPUCR} de 6 bits por medio de una interfaz gráfica que permite ensamblar y ejecutar un programa \textit{.ASM}.\textit{DroidBattles} es un juego de estrategia con interfaz gráfica que permite programar por medio de lenguaje ensamblador un conjunto de tanques contemplando múltiples restricciones. Sin embargo esta herramienta utiliza un lenguaje propietario, esto limita su uso ya que el curso se desarrolla alrededor de la arquitectura de la \textit{CPUCR}.
+Con el fin de unificar las herramientas del curso se propone en este proyecto eléctrico la creación de una estructura de procesamiento para la \textit{CPUCRBattles} que contempla los beneficios de las dos metodologías aplicadas en el curso para una sola arquitectura. Con ello se plantea el desarrollo de tres módulos principales denominados: Preprocesador, ensamblador y máquina finita de estados. Estos módulos se encargan de generar las señales adecuadas para los puertos de salida y entrada de la \textit{CPUCR} al procesar un archivo \textit{.ASM} que contiene el código fuente del programa en ensamblador. 
+
+\section{Alcances y limitaciones del proyecto}
+
+Cada uno de los 3 módulos principales de la herramienta tienen sus funciones específicas para preprocesado, ensamblado y ejecución de instrucciones dentro del flujo de programa. El proyecto sigue la arquitectura de la CPUCR de 6 bits cuyas características se encuentran descritas en los apuntes del curso \cite{Lochi}.
+Un aspecto relevante de la arquitectura de la CPUCR son sus 64 puertos de entrada y salida por los cuales se comunica con su entorno. La herramienta CPUCRBattles tiene la capacidad de simular el comportamiento de dichos puertos al procesar y ejecutar el flujo del programa en ensamblador. La estructura de procesamiento y generación de señales permite el acople a una interfaz gráfica del proyecto general \textit{CPUCRBattles}.
+
+Para el desarrollo del preprocesador y ensamblador se utiliza el lenguaje de programación Python debido a que facilita la manipulación de strings y de archivos por medio de las expresiones regulares y de funciones IO.
+
+Para la máquina de estados finita se emplea SystemC debido a su capacidad para modelar sistemas a nivel de comportamiento y su poder de ejecución multihilo.
+
+Debido a que el proyecto se planteó como un desarrollo de 16 semanas la herramienta no abarca las siguientes excepciones generales dentro del ASM: 
+\begin{itemize}
+\item El espaciamiento dentro del código no será considerado.
+%\item Los comentarios dentro del código se omitirán.
+\item Los macros no se implementaran para esta versión. 
+\item Las variables no se toman en cuenta.
+%\item Mapeado y direcciones se omite.
+\end{itemize}
+
+Estas limitaciones son cubiertas por medio de una estructura de excepciones dentro del programa la cual advierte al usuario que el archivo procesado contiene elementos fuera del alcance de la herramienta.
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Diseñar e implementar una estructura de procesamiento de código ensamblador para el CPUCRBattles.
+
+\subsection{Objetivos Específicos}
+
+\begin{enumerate}
+
+\item Desarrollar un módulo de preprocesamiento de los programas .ASM a través del lenguaje Python para la CPUCR de 6 bits.
+\item Desarrollar un ensamblador por medio del lenguaje Python para un conjunto de instrucciones de la CPUCR de 6 bits.
+\item Diseñar y desarrollar una máquina de estados finita por medio de la biblioteca SystemC de C++ para ejecutar un conjunto de instrucciones de la arquitectura CPUCR de 6 bits.
+
+\end{enumerate}
+
+\section{Cronograma}
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de actividades para el proyecto \textit{CPUCRBattles}.}
+\label{T:Cronograma}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\begin{tabular}[c]{@{}c@{}}Semanas\\ (II Ciclo 2015)\end{tabular} & \begin{tabular}[c]{@{}c@{}}1\\ 12-08\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}2\\ 19-08\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}3\\ 26-08\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}4\\ 02-09\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}5\\ 09-09\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}6\\ 16-09\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}7\\ 23-09\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}8\\ 30-09\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}9\\ 07-10\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}10\\ 14-10\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}11\\ 21-10\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}12\\ 28-10\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}13\\ 04-11\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}14\\ 11-11\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}15\\ 18-11\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}16\\ 25-11\end{tabular}} \\ \hline
+\begin{tabular}[c]{@{}c@{}}Desarrollo del \\ anteproyecto\end{tabular} & \cellcolor[HTML]{67FD9A}{\color[HTML]{67FD9A} } &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}Investigación \\ bibliográfica\end{tabular} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  &  &  &  &  &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}Entrega Capítulo I: \\ Incluye Introducción, \\ Objetivos y Metodología\end{tabular} &  & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}Entrega Capítulo II: \\ Marco Teórico del Proyecto\end{tabular} &  & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}Entrega Primer Avance: \\ Todos los capítulos\\  desarrollados hasta el momento\end{tabular} &  &  &  &  & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  &  &  &  &  &  &  &  \\ \hline
+Desarrollo de código &  &  &  &  & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  &  &  &  \\ \hline
+Verificación de código &  &  &  &  &  &  &  & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  \\ \hline
+Redacción Borrador &  &  &  &  &  &  &  &  & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} & \cellcolor[HTML]{67FD9A} &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}Presentación Final y \\ Entrega Informe Final\end{tabular} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor[HTML]{67FD9A} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\section{Metodología}
+
+La metodología para el desarrollo efectivo del proyecto es la siguiente:
+
+\begin{enumerate}
+
+\item Obtención de estudios bibliográficos para:
+
+\begin{itemize}
+	\item Teoría de compiladores, ensambladores y máquinas de estado finitas.
+	\item Bibliotecas RE de Python para manipulación de strings por medio de expresiones regulares.
+	\item Bibliotecas de Python para la manipulación de archivos.
+	 \item Biblioteca SystemC de C++ y sus funciones para la implementación de máquinas de estados finitas.
+	  \item Acople entre SystemC y la estructura de preprocesado.
+\end{itemize}
+
+\item Por medio de la información obtenida se desarrolla la base principal de la herramienta de procesado para la CPUCRBattles e iterativamente a través de recomendaciones se mejora su funcionalidad.
+
+\item Por último se evalúa individualmente y en conjunto los módulos descritos anteriormente a través de un plan de pruebas para comprobar su funcionamiento. Y se elabora un manual de uso básico del proyecto.
+
+\end{enumerate}
+
+
+
+\section{Desarrollo}
+
+Este proyecto se estructura por medio de capítulos, cada uno tiene como tarea aclarar los siguientes tópicos:
+
+\begin{enumerate}
+
+\item Capítulo I: Introducción. 
+Muestra la justificación del proyecto, los alcances y limitaciones, los objetivos y la metodología que permite cumplir los mismos.
+
+\item Capítulo II: Antecedentes y Marco Teórico. 
+Introduce al lector conceptos claves de arquitectura de computadores, teoría de compiladores y ensambladores y además contextualiza las características de la arquitectura de la CPUCR en las cuales se fundamenta la herramienta.
+
+\item Capítulo III: Implementación del procesamiento para la CPUCRBattles. Aquí se describe el diseño y la implementación de cada módulo que forma parte del desarrollo, así como las bibliotecas y las funciones utilizadas.
+
+\item Capítulo IV: Prueba de funcionamiento. Se muestran los resultados ante las pruebas de funcionalidad de la herramienta y se presenta la manera en la que se puede acoplar a la interfaz gráfica.
+
+\item Capítulo V: Conclusiones y recomendaciones. Se listan las conclusiones obtenidas a lo largo del proyecto, se muestra la visión obtenida del mismo y se brindan recomendaciones para futuras versiones de la herramienta. 
+
+\end{enumerate}
