@@ -1,13 +1,30 @@
 \chapter{Marco Teórico}%\phantom{\cite{beetz09ijcss}}
 %\textcolor{red}{En desarrollo!!!!}.
 
+\section{GPU}
+\subsection{Definición}
+
+Las unidades de procesamiento gráfico se encargan de rápidamente renderizar (representar) objetos 3D en forma de píxeles en la pantalla de la computadora típicamente por medio de arquitecturas de hardware basadas en la técnica de rasterización. La mayor parte de las GPU han sido diseñadas para realizar operaciones fijas organizadas en forma de pipeline para ir pasando vértices y píxeles a través de distintas etapas.  
+
+A continuación se mencionan las etapas principales del pipeline de gráficos:
+\begin{enumerate}
+
+\item El programa de usuario proporciona los datos al GPU en la forma de primitivas como puntos, líneas y polígonos que describen la geometría 3D. 
+\item Etapa geométrica: las primitivas geométricas son procesadas en base a los vértices y son transformados de coordenadas 3D a triángulos 2D en la pantalla.. 
+\item Etapa de rasterización: en esta etapa se dibuja una imagen mediante el uso de los datos anteriormente generados así como de los cálculos computacionales por píxel. La salida es un conjunto de píxeles donde cada píxel posee sus propios atributos.  
+
+\end{enumerate}
+
+Los conjuntos de datos muy grandes que deben ser visualizados en tres dimensiones normalmente son creados usando representaciones de superficies mediante el dibujo de primitivas geométricas que crean mallas poligonales, pero las técnicas convencionales de rasterización al usarse en el renderizarizado de datos volumétricos producen pérdidas en la visualización. Las técnicas de  renderización de volumen tienen más información que los métodos de renderización por  superficie pero poseen una mayor complejidad y mayores tiempos de renderización.
+
+
 \section{Raycasting}
 
 Se presentan detalles acerca del algoritmo de raycasting en el cual se basa el GPU Theia para su funcionamiento.
 
 \subsection{Definición}
 
-El algoritmo de raycasting funciona haciendo cálculos un píxel a la vez, y para cada píxel la tarea básica es encontrar el objeto que es observado en la posición correspondiente a ese píxel en la imagen. Se puede decir que cada píxel ve en una dirección distinta y cualquier objeto que es observado por un píxel debe intersectar el rayo proveniente desde el punto de vista de la cámara. El objeto esperado es aquel que es intersectado primero por el rayo más cercano a la cámara. Una vez que el objeto es encontrado, se emplea el punto de intersección, la superficie normal, y la otra información para definir el color de cada píxel. 
+El algoritmo de raycasting funciona haciendo cálculos un píxel a la vez, y para cada píxel la tarea básica es encontrar el objeto que es observado en la posición correspondiente a ese píxel en la imagen. Se puede decir que cada píxel ve en una dirección distinta y cualquier objeto que es observado por un píxel debe intersectar el rayo proveniente desde el punto de vista de la cámara. El objeto esperado es aquel que es intersectado primero por el rayo más cercano a la cámara. Una vez que el objeto es encontrado, se emplea el punto de intersección, la superficie normal, y la otra información del objeto para definir el color de cada píxel. 
 
 Entonces se puede decir que un algoritmo de raycasting tiene tres partes básicas:
 
@@ -40,16 +57,33 @@ Un seudocódigo sobre el algoritmo de raycasting es el siguiente:
 
 \end{enumerate}
 
-\section{GPU}
-\subsection{Definición}
+En términos generales se puede afirmar que la técnica de raycasting evalúa el color de cada pixel en la imagen al disparar un rayo a través de la escena desde la posición del observador. Si el rayo golpea el volumen, el color del pixel es calculado muestreando los datos a lo largo del rayo en un número finito de posiciones en el volumen  y combinando cada resultado en uno solo. Este método tiene una limitación al ejecutarse en los CPUs: para vólumenes de datos grandes el tiempo de renderización para una sola imagen es muy alto para visualización en tiempo real.
 
-Las unidades de procesamiento gráfico se encargan de rápidamente renderizar (representar) objetos 3D en forma de píxeles en la pantalla de la computadora típicamente por medio de arquitecturas de hardware basadas en la técnica de rasterización. La mayor parte de las GPU han sido diseñadas para realizar operaciones fijas organizadas en forma de pipeline para ir pasando vértices y píxeles a través de distintas etapas.  
+\subsection{Transformaciones}
 
-A continuación se mencionan las etapas principales del pipeline de gráficos:
-\begin{enumerate}
 
-\item El programa de usuario proporciona los datos al GPU en la forma de primitivas como puntos, líneas y polígonos que describen la geometría 3D. 
-\item Etapa geométrica: las primitivas geométricas son procesadas en base a los vértices y son transformados de coordenadas 3D a triángulos 2D en la pantalla.. 
-\item Etapa de rasterización: Los objetos en la pantalla pasan a los procesadores de píxeles y son rasterizados y coloreados para eventualmente mostrarse en el monitor.
 
-\end{enumerate}
+\section{Ejemplos de GPU con unidades de generación de rayos}
+
+\subsection{SaarCOR}
+\subsection{DRPU}
+\subsection{RayCore}
+\subsection{Vizard II}
+
+\section{Arquitectura de Theia}
+
+\section{Métodos de normalización}
+
+\subsection{Goldschmidt}
+
+\subsection{Newton-Raphson}
+
+\subsection{SRT-Redundant}
+
+\subsection{Non-Restoring}
+
+\subsection{Wong-Goto}
+
+
+
+\section{Verificación funcional}
