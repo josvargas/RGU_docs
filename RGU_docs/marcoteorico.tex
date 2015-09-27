@@ -11,11 +11,11 @@ A continuación se mencionan las etapas principales del pipeline de gráficos:
 
 \item El programa de usuario proporciona los datos al GPU en la forma de primitivas como puntos, líneas y polígonos que describen la geometría 3D. 
 \item Etapa geométrica: las primitivas geométricas son procesadas en base a los vértices y son transformados de coordenadas 3D a triángulos 2D en la pantalla.. 
-\item Etapa de rasterización: en esta etapa se dibuja una imagen mediante el uso de los datos anteriormente generados así como de los cálculos computacionales por píxel. La salida es un conjunto de píxeles donde cada píxel posee sus propios atributos.  
+\item Etapa de rasterización: en esta etapa se dibuja una imagen mediante el uso de los datos anteriormente generados así como de los cálculos computacionales por píxel. La salida es un conjunto de píxeles donde cada píxel posee sus propios atributos (color, sombras, etc).  
 
 \end{enumerate}
 
-Los conjuntos de datos muy grandes que deben ser visualizados en tres dimensiones normalmente son creados usando representaciones de superficies mediante el dibujo de primitivas geométricas que crean mallas poligonales, pero las técnicas convencionales de rasterización al usarse en el renderizarizado de datos volumétricos producen pérdidas en la visualización. Las técnicas de  renderización de volumen tienen más información que los métodos de renderización por  superficie pero poseen una mayor complejidad y mayores tiempos de renderización.
+Los conjuntos de datos muy grandes que deben ser visualizados en tres dimensiones normalmente son creados usando representaciones de superficies mediante el dibujo de primitivas geométricas que crean mallas poligonales (en la mayoría de casos son mallas triangulares), pero las técnicas convencionales al usarse en el renderizarizado de datos volumétricos producen pérdidas en la visualización. Las técnicas de  renderización de volumen tienen más información que los métodos de renderización por superficie pero poseen una mayor complejidad y mayores tiempos de renderización.
 
 
 \section{Raycasting}
@@ -24,7 +24,7 @@ Se presentan detalles acerca del algoritmo de raycasting en el cual se basa el G
 
 \subsection{Definición}
 
-El algoritmo de raycasting funciona haciendo cálculos un píxel a la vez, y para cada píxel la tarea básica es encontrar el objeto que es observado en la posición correspondiente a ese píxel en la imagen. Se puede decir que cada píxel ve en una dirección distinta y cualquier objeto que es observado por un píxel debe intersectar el rayo proveniente desde el punto de vista de la cámara. El objeto esperado es aquel que es intersectado primero por el rayo más cercano a la cámara. Una vez que el objeto es encontrado, se emplea el punto de intersección, la superficie normal, y la otra información del objeto para definir el color de cada píxel. 
+El algoritmo de raycasting funciona haciendo cálculos a un píxel a la vez, y para cada píxel la tarea básica es encontrar el objeto que es observado en la posición correspondiente a ese píxel en la imagen, o sea parte del observador hacia los objetos a visualizar contrario al método por rasterización. Se puede decir que cada píxel ve en una dirección distinta y cualquier objeto que es observado por un píxel debe intersectar el rayo proveniente desde el punto de vista de la cámara. El objeto esperado es aquel que es intersectado primero por el rayo más cercano a la cámara. Una vez que el objeto es encontrado, se emplea el punto de intersección, la superficie normal, y alguna otra información del objeto para definir el color de cada píxel. 
 
 Entonces se puede decir que un algoritmo de raycasting tiene tres partes básicas:
 
@@ -43,17 +43,17 @@ Con el objetivo de generar rayos, primero se necesita una representación matem�
   p(t) = e+t(s-e)
 \end{equation}
 
-Esta fórmula implica que se empieza en el punto e y se avanza a través del vector s-e hasta llegar al punto p. Valores negativos de t implica que se encuentra detrás del ojo.
+Esta fórmula implica que se empieza en el punto e y se avanza a través del vector s-e hasta llegar al punto p. Valores negativos de t implica que se encuentra el rayo detrás del ojo.
 
 Un seudocódigo sobre el algoritmo de raycasting es el siguiente:
 
 \begin{enumerate}
 
 \item For every pixel \# para cada píxel 
-\item \hspace{5 mm} Construct a ray from the eye \hspace{3 mm} \# construya un rayo
-\item \hspace{5 mm} For every object in the scene \hspace{3 mm} \# para cada objeto en la escena
-\item \hspace{10 mm}	 Find intersection with the ray \hspace{3 mm} \# encuentre la intersección 	
-\item \hspace{10 mm} Keep if closest 				\hspace{3 mm} \# Guarde el más cercano
+\item \hspace{5 mm} Construct a ray from the eye \hspace{3 mm} // construya un rayo
+\item \hspace{5 mm} For every object in the scene \hspace{3 mm} // para cada objeto en la escena
+\item \hspace{10 mm}	 Find intersection with the ray \hspace{3 mm} // encuentre la intersección 	
+\item \hspace{10 mm} Keep if closest 				\hspace{3 mm} // Guarde el más cercano
 
 \end{enumerate}
 
@@ -61,29 +61,81 @@ En términos generales se puede afirmar que la técnica de raycasting evalúa el
 
 \subsection{Transformaciones}
 
-
-
-\section{Ejemplos de GPU con unidades de generación de rayos}
+\section{Arquitecturas con unidades de generación de rayos}
 
 \subsection{SaarCOR}
 \subsection{DRPU}
 \subsection{RayCore}
-\subsection{Vizard II}
+%\subsection{Vizard II}
 
-\section{Arquitectura de Theia}
+\section{Arquitectura de TheiaV3}
+\subsection{Introducción a TheiaV3}
+TheiaV3 es la tercera iteración del GPU multinúcleo de tipo raycasting Theia. El proyecto Theia es un proyecto de la modalidad Open Source (Código Libre) para experimentar con el hardware gráfico 3D.
+
+El principal objetivo del proyecto Theia es proveer un ambiente Open Source incluyendo un código RTL funcional, un ambiente de pruebas y un lenguaje libre de alto nivel y un compilador para programar a Theia.
+
+El hardware de Theia es descrito usando código RTL escrito en Verilog 2001. Para realizar una simulación completa del código RTL, se necesita tanto un conjunto de archivos para representan los parámetros de entrada, así como el código de usuario en representación binaria.  
+
+\subsection{Descripción general del sistema}
+
+Theia es una unidad de procesamiento gráfico (GPU) multinúcleo, que se encuentra compuesto de distintos bloques que interactúan entre ellos con la finalidad de renderizar cuadros de imágenes.
+
+En la figura se muestran los principales bloques funcionales de Theia así como la memoria principal que se encuentra en el exterior del GPU. La memoria principal es una memoria de tipo RAM que es empleada para almacenar las variables geométricas, el código, entre otros detalles.
+
+\subsection{Unidad de Generación de Rayos}
+
+La Unidad de Generación de Rayos (RGU por sus siglas en inglés) es un módulo de hardware encargado de la generación de las estructuras de datos que representan los rayos que son enviados a los otros módulos encargados de la intersección de los mismos. La RGU tiene un conjunto limitado de operaciones aritméticas así un conjunto de instrucciones propias orientadas a la generación de los rayos por lo que carece de instrucciones de control de flujo.  
 
 \section{Métodos de normalización}
 
-\subsection{Goldschmidt}
+La Unidad de Generación de Rayos de TheiaV3 debe realizar la operación del inverso de la raíz cuadrada con el objetivo de normalizar el rayo (vector) visto desde el observador, para lo cual se debe implementar dentro de
+la unidad un mecanismo que permita calcular una aproximación por medio de instrucciones aritméticas simples y de una forma rápida.  A continuación se describen los métodos posibles. 
 
-\subsection{Newton-Raphson}
+Existen varios tipos de posibles algoritmos para el cálculo de raíces cuadradas pero en realidad para la implementación en microprocesadores hay pocos, y estos caben en dos categorías: multiplicativos y sustractivos. Los métodos multiplicativos normalmente se implementan en hardware junto con el multiplicador de la unidad de punto flotante y permite realizar operaciones rapidamente, y por otro los métodos sustractivos emplean hardware dedicado a estas operaciones, lo cual incrementa la latencia y los vuelve técnicas más lentas.   
 
-\subsection{SRT-Redundant}
+\subsection{Métodos multiplicativos}
 
-\subsection{Non-Restoring}
+Los algoritmos multiplicativos se suelen emplear para realizar cálculos estimados de raíces cuadradas usando iteraciones a partir de un estimado inicial. Emplear este tipo de técnicas reducen la ejecución de una operación de raíz cuadrada en una serie de multiplicaciones, sustracciones, y corrimientos de bits. Además vale la pena resaltar que estos métodos numéricos convergen cuadráticamente, lo cual implica que un estimado inicial apropiado preciso proporcionará resultados más precisos por cada iteración. Las técnicas empleadas frecuentemente en microprocesadores son los métodos de Newton-Raphson y de Goldschmidt, donde ambos métodos comparte muchos detalles en común pero se diferencian en el orden en que realizan las operaciones.
 
-\subsection{Wong-Goto}
+\subsubsection{Newton-Raphson}
+
+El método de Newton-Raphson es un método iterativo de convergencia cuadrática que emplea multiplicaciones sucesivas para aprovechar las capacidades de multiplicación rápida de los procesadores contemporáneos. 
+
+Al ser Newton-Raphson un método plenamente iterativo, con el objetivo de reducir las iteraciones que se realizan en los cálculos se suele emplear tablas de hardware las cuales se emplean como punto de partida en el proceso de iteraciones.
+
+Aplicando la definición del método de Newton-Raphson se obtiene la expresión \eqref{eq:newton-raphson}:
+
+\begin{equation}
+\label{eq:newton-raphson}
+  R_{i+1}=R_{i}(3-XR_{i}^{2})/2
+\end{equation}
+
+donde X es el valor de la base de la raíz y $R_{i}$ el valor del cálculo de la raíz en la iteración i. El valor de la iteración 0 es el valor que debe salir de las tablas de aproximación.
 
 
+\subsubsection{Goldschmidt}
+
+El método de Goldschmidt para división y aplicada también para raíces cuadradas, surgió de la tesis de graduación de maestría de Ingeniería Eléctrica del MIT por parte de Robert Goldschmidt en 1964. Esta técnica se basa en la aproximación de la raíz cuadrada por medio de productos sucesivos donde si $b_{0}$ es el valor de la base de la raíz cuadrada se busca que se cumpla que $b_{n}=b_{0}Y_{0}Y_{1}...Y_{n}=1$.
+
+El método de Goldschmidt es ideal para aplicaciones que implementan de forma separada la multiplicación de la suma y en general se emplea en multiplicadores en pipeline.
+
+Las ecuaciones \eqref{eq:goldschmidt1} y \eqref{eq:goldschmidt2} son necesarias para el cumplimiento de este método numérico.
+
+\begin{equation}
+\label{eq:goldschmidt1}
+  b_{i+1}=b_{i}Y_{i}^{2}
+\end{equation}
+
+\begin{equation}
+\label{eq:goldschmidt2}
+  Y_{i}=(3-b_{i})/2
+\end{equation}
+  
+
+%\subsection{SRT-Redundant}
+
+%\subsection{Non-Restoring}
+
+%\subsection{Wong-Goto}
 
 \section{Verificación funcional}
