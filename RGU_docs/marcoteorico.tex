@@ -4,7 +4,7 @@
 \section{GPU}
 \subsection{Definición}
 
-Las unidades de procesamiento gráfico se encargan de rápidamente renderizar (representar) objetos 3D en forma de píxeles en la pantalla de la computadora típicamente por medio de arquitecturas de hardware basadas en la técnica de rasterización. La mayor parte de las GPU han sido diseñadas para realizar operaciones fijas organizadas en forma de pipeline para ir pasando vértices y píxeles a través de distintas etapas.  
+Las unidades de procesamiento gráfico se encargan de rápidamente renderizar (representar) objetos 3D en forma de píxeles en la pantalla de la computadora, típicamente, por medio de arquitecturas de hardware basadas en la técnica de rasterización. La mayor parte de las GPU han sido diseñadas para realizar operaciones fijas organizadas en forma de pipeline para ir pasando vértices y píxeles a través de distintas etapas.  
 
 A continuación se mencionan las etapas principales del pipeline de gráficos:
 \begin{enumerate}
@@ -45,17 +45,33 @@ Con el objetivo de generar rayos, primero se necesita una representación matem�
 
 Esta fórmula implica que se empieza en el punto e y se avanza a través del vector s-e hasta llegar al punto p. Valores negativos de t implica que se encuentra el rayo detrás del ojo.
 
-Un seudocódigo sobre el algoritmo de raycasting es el siguiente:
+Un seudocódigo sobre el algoritmo de raycasting se muestra se muestra abajo en el seudocódigo \ref{ray}.
 
-\begin{enumerate}
+\begin{algorithm}
+\caption{Algoritmo de Raycasting}\label{ray}
+\begin{algorithmic}[1]
+\Procedure{Ray-cast}{}
+\For $\textit{ cada pixel}$
+\State $\textit{ Construya un rayo desde el ojo}$
+\For $\textit{ para cada objeto en la escena}$
+\State $\textit{ Encuentre la intersección con el rayo}$
+\State $\textit{ Guarde esta intersección si es la más cercana}$
+\EndFor
+\EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
-\item For every pixel \# para cada píxel 
-\item \hspace{5 mm} Construct a ray from the eye \hspace{3 mm} // construya un rayo
-\item \hspace{5 mm} For every object in the scene \hspace{3 mm} // para cada objeto en la escena
-\item \hspace{10 mm}	 Find intersection with the ray \hspace{3 mm} // encuentre la intersección 	
-\item \hspace{10 mm} Keep if closest 				\hspace{3 mm} // Guarde el más cercano
 
-\end{enumerate}
+%\begin{enumerate}
+
+%\item For every pixel \# para cada píxel 
+%\item \hspace{5 mm} Construct a ray from the eye \hspace{3 mm} // construya un rayo
+%\item \hspace{5 mm} For every object in the scene \hspace{3 mm} // para cada objeto en la escena
+%\item \hspace{10 mm}	 Find intersection with the ray \hspace{3 mm} // encuentre la intersección 	
+%\item \hspace{10 mm} Keep if closest 				\hspace{3 mm} // Guarde el más cercano
+
+%\end{enumerate}
 
 En términos generales se puede afirmar que la técnica de raycasting evalúa el color de cada pixel en la imagen al disparar un rayo a través de la escena desde la posición del observador. Si el rayo golpea el volumen, el color del pixel es calculado muestreando los datos a lo largo del rayo en un número finito de posiciones en el volumen  y combinando cada resultado en uno solo. Este método tiene una limitación al ejecutarse en los CPUs: para vólumenes de datos grandes el tiempo de renderización para una sola imagen es muy alto para visualización en tiempo real.
 
@@ -63,9 +79,20 @@ En términos generales se puede afirmar que la técnica de raycasting evalúa el
 
 \section{Arquitecturas con unidades de generación de rayos}
 
+Existen en la literatura pocas referencias a unidades de raycasting o de ray tracing (variante del algoritmo de ray casting que genera rayos secundarios por medio de la recursión en el punto de incidencia del rayo original) que mencionen explícitamente dentro de su arquitectura la implementación de unidades de generación de rayos, las principales referencias son dos proyectos de hardware provenientes de la Universidad de Saarland: SaarCOR y DRPU. En los artículos no se mencionan detalles de cómo se implementaron unidades de generación de rayos, solo se hablan de ellas de forma muy general.
+
 \subsection{SaarCOR}
+
+SaarCOR es el nombre de la unidad de ray tracing que fue diseñado para un chip de uso específico que está conectado por medio de un sistema de bus "host" (huésped) a otros chips que están en la misma placa de computadora. SaarCOR está dividido en tres unidades principales: la unidad de generación de rayos y de "shading" (RGS), el núcleo de ray tracing (RTC) y una unidad de manejo de acceso a memoria (RTC-MI).   
+
 \subsection{DRPU}
+
+DRPU es el diseño y la implementación de un ASIC para procesamiento de ray tracing que posee capacidades de programabilidad similares a un GPU convencional en la universidad de Saarland. La arquitectura consiste en dos partes principales: Unidades de Ray Casting (encargadas de las estructuras espaciales) y un Procesador de "Shading" (encargado de hacer labores de sombreado y de generación de rayos).  
+
 \subsection{RayCore}
+
+RayCore es el diseño y la implementación de una unidad de ray tracing para dispositivos móviles y de bajo consumo por parte de miembros de la Universidad de Sejong en Corea del Sur. Dentro de RayCore existen dos unidades principales: una Unidad de Creación de Árboles (TBU) y una Unidad de Ray-Tracing (RTU). Dentro de RTU hay una unidad de generación de rayos tanto primarios como secundarios definidos por la unidad Set-Up y por la unidad de "shading", respectivamente.   
+
 %\subsection{Vizard II}
 
 \section{Arquitectura de TheiaV3}
@@ -103,27 +130,41 @@ El método de Newton-Raphson es un método iterativo de convergencia cuadrática
 
 Al ser Newton-Raphson un método plenamente iterativo, con el objetivo de reducir las iteraciones que se realizan en los cálculos se suele emplear tablas de hardware las cuales se emplean como punto de partida en el proceso de iteraciones.
 
-Aplicando la definición del método de Newton-Raphson se obtiene la expresión \eqref{eq:newton-raphson}:
+El método de Newton-Raphson se fundamenta encontrar la mejor aproximación posible al valor de las raíces o ceros de una función F(x) donde $F(x)=0$. 
+
+Entonces mediante el método de Newton-Raphson si se inicia iterando a partir de un valor $X_0$ aproximado al valor deseado, entonces se tiene la expresión \ref{newton_raphson_definition}
+
+
+\begin{align} \label{newton_raphson_definition}
+\begin{split}
+  f'(x_0) &= \frac{f(x_0)}{x_0-x_1} 
+\\
+  x_1 &= x_0-\frac{f(x_0)}{f'(x_0)} 
+\end{split}  
+\end{align} 
+
+
+Aplicando la definición del método de Newton-Raphson a la ecuación $x^{-2}-S=0$ donde la raíz es $\frac{1}{\sqrt{S}}$ se obtiene la expresión \eqref{eq:newton_raphson_square_root}:
 
 \begin{equation}
-\label{eq:newton-raphson}
-  R_{i+1}=R_{i}(3-XR_{i}^{2})/2
+\label{eq:newton_raphson_square_root}
+  R_{i+1}=R_{i}(3-SR_{i}^{2})/2
 \end{equation}
 
-donde X es el valor de la base de la raíz y $R_{i}$ el valor del cálculo de la raíz en la iteración i. El valor de la iteración 0 es el valor que debe salir de las tablas de aproximación.
+donde S es el valor de la base de la raíz y $R_{i}$ el valor del cálculo de la raíz cuadrada en la iteración i. El valor de la iteración 0 es el valor que debe salir de las tablas de aproximación.
 
 
 \subsubsection{Goldschmidt}
 
 El método de Goldschmidt para división y aplicada también para raíces cuadradas, surgió de la tesis de graduación de maestría de Ingeniería Eléctrica del MIT por parte de Robert Goldschmidt en 1964. Esta técnica se basa en la aproximación de la raíz cuadrada por medio de productos sucesivos donde si $b_{0}$ es el valor de la base de la raíz cuadrada se busca que se cumpla que $b_{n}=b_{0}Y_{0}Y_{1}...Y_{n}=1$.
 
-El método de Goldschmidt es ideal para aplicaciones que implementan de forma separada la multiplicación de la suma y en general se emplea en multiplicadores en pipeline.
+El método de Goldschmidt es ideal para aplicaciones que implementan de forma separada la multiplicación de la suma y en general se emplea en multiplicadores en pipeline. Un detalle de este método es que 
 
-Las ecuaciones \eqref{eq:goldschmidt1} y \eqref{eq:goldschmidt2} son necesarias para el cumplimiento de este método numérico.
+Las ecuaciones \eqref{eq:goldschmidt1} y \eqref{eq:goldschmidt2} son necesarias para el cumplimiento de este método numérico. El método de Goldschmidt, contrario al de Newton, no es autocorregible lo cual implica que existan errores acumulados.
 
 \begin{equation}
 \label{eq:goldschmidt1}
-  b_{i+1}=b_{i}Y_{i}^{2}
+  b_{i}=b_{i-1}Y_{i-1}^{2}
 \end{equation}
 
 \begin{equation}
@@ -138,4 +179,44 @@ Las ecuaciones \eqref{eq:goldschmidt1} y \eqref{eq:goldschmidt2} son necesarias 
 
 %\subsection{Wong-Goto}
 
+\section{Punto fijo sin signo}
+
+Una palabra de N-bits cuando es representada en la forma de un número racional en punto fijo, puede tomar los valores dados por el subconjunto P pertenecientes a los racionales no negativos como se observa en la ecuación \eqref{eq:subset}.
+
+\begin{equation}
+\label{eq:subset}
+	P = \{p/2^{b}\quad |\quad 0 \leq p \leq 2^{N}-1, \quad p \in \mathbb{Z}\}
+\end{equation}
+
+En la ecuación anterior se tiene que P contiene $2^{N}$ elementos. Además la nomenclatura P(a,b) representa el subconjunto P, suponiendo que $a=N-b$.
+
+Por otra parte, el valor de un número binario de N-bits X, perteneciente al subconjunto P está dado por la ecuación \eqref{eq:X}.
+\begin{equation}
+\label{eq:X}
+   X = (1/2^{b}){\sum^{N-1}_{n=0}} 2^{n} x_{n}
+\end{equation}
+
+donde $X_n$ representa el bit n del número X. El rango de números que puede tomar como representación el número X es de 0 hasta $(2^{N}-1)/2^{b}=2^{a}-2^{-b}$.
+
+La representación binaria de un número X en punto fijo de 6-bits donde $b=2$, tiene la forma de $x_{3}x_{2}x_{1}x_{0}x_{-1}x_{-2}$.
+
+%\subsection{Reglas aritméticas}
+
+%\begin{enumerate}
+
+%\item \emph{Tamaño de las palabras:} El número bits requeridos para representar P(a,b) es a+b.
+
+%\item \emph{Rango de palabras:} El rango de P(a,b) es $0 \leq X \leq 2^{a}-2^{-b}$.
+
+%\item \emph{Multiplicación:} $P(a,b)*P(c,d)=P(a+c,b+d)$.
+
+%\item \emph{División:} $P(a,b)/P(c,d)=P(a+c, \lceil log_{2}(2^{c+b}-2^{b-d}) \rceil)$. 
+
+%\item \emph{Extraer los bits más significativos:} Si define la operación H(P(a,b)) como la extracción de la parte más significativa y a L(P(a,b)) como la operación para extraer la parte menos significativa, entonces se tiene que $H(P(a,b))=P(a, n-a)$ y $L(P(a,b))=P(n-b,b)$. 		
+
+%\item \emph{Shift:} $P(a,b) \gg n = P(a-n,b+n)$. 	
+
+%\end{enumerate}
+
 \section{Verificación funcional}
+

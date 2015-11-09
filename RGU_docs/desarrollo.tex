@@ -2,7 +2,109 @@
 
 \section{Generalidades}
 
-En esta sección se presentan generalidades del diseño de la aplicación. Se explica el por qué se siguió el modelo MVC tradicional y los navegadores con los cuales se garantiza que la aplicación sea completamente funcional.
+En esta sección se presentan generalidades acerca de la implementación del algoritmo de generación de rayos y de las operaciones necesarias para generar los vectores en el dominio del espacio.
+
+\subsection{Vectores normalizados}
+
+Los vectores normalizados en el espacio están dados por un punto Y que se dirige a un punto X, por lo cual se sabe que X-Y es la magnitud sin normalizar del vector, por lo que se necesita posteriormente dividir entre la raíz cuadrada del valor absoluto X-Y, para así lograr obtener el vector normalizado que requiere la Unidad de Generación de Rayos (RGU) a su salida.
+
+\begin{equation}
+\label{eq:vectors}
+  F = \frac{X-Y}{\sqrt{|X-Y|}}
+\end{equation} 
+
+Por la ecuación \eqref{eq:vectors} se puede apreciar que se necesita obtener el inverso de la raíz cuadrada de la resta de los dos puntos en el espacio para lo cual se necesitaría de la capacidad de calcular la raíz cuadrada de un vector, dado lo anterior lo que sigue es definir las operaciones mínimas para obtener el inverso de la raíz cuadrada dentro de un intervalo de valores. 
+
+\subsection{Elección del Newton Raphson}
+
+Dentro de los métodos multiplicativos para realizar el cálculo del inverso de la raíz cuadrada se tenían dos métodos principales: el método de Newton-Raphson y el método de Goldschmidt.
+
+De estos dos métodos empleados en la aproximación de divisiones se puede observar que el método de Goldschmidt a la hora de adaptarse para el cálculo de la raíz cuadrada adquiere casi la misma forma que el método de Newton-Raphson adaptado a las raíces cuadradas, además que el método de Goldschmidt está diseño para calcular dos iteraciones (el numerador y el denominador) por lo que está más orientado a estructuras que usen de manera intensiva pipeline como la Unidades de Punto Flotante.
+
+Por otra parte los métodos sustractivos como el método SRT implican el uso de muchas estructuras de hardware especializadas que se realizan varias iteraciones de corrimientos para la correcta aproximación de un resultado por lo que además resulta ser un método lento en comparación con los métodos multiplicativos.
+
+\section{Operaciones con el método de Newton Raphson}
+
+El método de Newton-Raphson para la aproximación del inverso de la raíz cuadrada entonces se puede desglosar en dos partes: 
+
+\begin{enumerate}
+
+\item Obtención de una aproximación de la raíz cuadrada
+
+\item Iteración sobre la aproximación de la raíz cuadrada
+
+\end{enumerate}  
+  
+Se necesita un aproximación muy precisa que facilite la convergencia rápida al valor del inverso de la raíz cuadrada  por lo cual se guardan algunos valores en una memoria (LookUp Table) que permitan un valor inicial lo suficientemente robusto como evitar múltiples iteraciones innecesarias que implicarían varios ciclos de reloj. 
+  
+Por medio de iteraciones sobre la aproximación obtenida de una tabla se puede mejorar tal valor del inverso de la raíz, empleando básicamente solo tres operaciones:
+
+\begin{enumerate}
+
+\item Resta
+
+\item Multiplicación
+
+\item Un corrimiento hacia la izquierda
+
+\end{enumerate} 
+
+Dado que la implementación del RGU se realiza en un FPGA que posee al interior módulos de multiplicación incrustados es innecesario diseñar un sistema de multiplicación convencional en la descripción en Verilog.
+
+Con respecto al corrimiento hacia la izquierda esta operación corresponde al dos en el denominador que se halla en la ecuación \eqref{eq:newton_raphson_square_root}.
+
+
+\section{Consideraciones del Punto Fijo}
+
+La multiplicación de números enteros no presenta mayor complicación, pero el incoveniente proviene cuando se intentan realizar operaciones en formato de punto fijo.
+
+En el formato de punto fijo se define una cantidad de bits que representan la parte entera, y la restante cantidad de bits representan la parte fraccionaria del número (esta parte se corresponde a la escala).
+
+Cada vez que se multiplica resulta que el número resultante se aumenta respecto a la cantidad de bits que tenga la parte fraccionaria, lo cual implica que se debe tener un registro para resultados lo suficientemente grande para no perder los bits que se puedan perder por tal efecto.
+
+Después de haber realizado la multiplicación se puede desplazar los bits hacia la izquierda una cantidad de veces igual al número de la escala en cuestión con el fin de obtener un resultado del mismo tamaño de bits que los operandos.
+
+Al final esto deriva en una operación de multiplicación especial con respecto a la que se suele usar.
+
+La resta de números en punto fijo permanece intacta ya que se mantiene igual el número de bits del resultado de tal operación.
+
+\section{Estructura del RGU}
+
+La Unidad de Generación de Rayos (RGU) usa dos instancias de memorias: una para las intrucciones y otra para el almacenamiento de datos. La tarjeta Papilio que ha implementado el modelo del GPU Theia posee una memoria DRAM lo cual facilitaría enormemente el acceso a memoria y permitiría al dispositivo tener una mayor programabilidad.
+
+Por lo anterior se puede apreciar que el RGU tiene la capacidad de programar las instrucciones básicas que tiene así como su orden, con el objetivo de permitir la experimentación del dispositivo así como explotar las capacidades de debugging que posee las instrucciones del GPU Theia por medio de la comunicación serial que tiene gracias debido a un IP de Xilinx.
+
+La RGU también tiene una instrucción especial llamada PUSH que  habilita a la cola que hay a la salida del RGU almacenar el valor que se calculó por medio de la tabla (LUT) y las iteraciones.
+
+Por otra parte por el momento las intrucciones del RGU deben ir intercaladas por instrucciones NOP ya que existen "data hazards" (peligros de datos) debido a que no se ha planteado el uso de pipeline en los datos, pero es de fácil implementación, y estará implementado en la versión final del proyecto.
+
+\section{Instrucciones de iteración}
+
+A continuación se plantean las instrucciones necesarias (en seudocódigo) para la ejecución del método de Newton-Raphson para el cálculo de la raíz cuadrada. 
+
+\begin{algorithm}
+\caption{Método de Newton-Raphson}\label{ray}
+\begin{algorithmic}[1]
+\Procedure{Newton-Raphson para RN}{}
+\State $\textit{ Busque en X en LUT para hallar R0}$
+\For $\textit{ cada iteración i hasta N}$
+\State $\textit{ Multiplique Ri por Ri y guarde en S0}$
+\State $\textit{ Multiplique X por S0 y guarde en S1}$
+\State $\textit{ Reste X menos S1 y guarde en S2}$
+\State $\textit{ Multiplique S2 por Ri}$
+\State $\textit{ Desplace un bit a la izquierda a S2 y guarde en Ri}$
+\EndFor
+\State $\textit{ Enviar dato válido}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%  MACHOTE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
 
 \subsection{Modelo MVC}
 
@@ -18,6 +120,8 @@ Para seguir este patrón las divisiones se realizaron de la siguiente manera:
 \item El Model se realizó utilizando el framework LoopBack de Stronloops y algunas funciones del NodeJS. Además la persistencia de los datos se realiza haciendo uso de una base de datos en MongoDb.  
 
 \end{enumerate}
+
+
 
 \subsection{Navegadores}
 
@@ -356,3 +460,5 @@ Con esto se concluye el desarrollo de la aplicación y se continua con el análi
 	\includegraphics[width=0.9\linewidth]{images/dbArq}
 	\caption{Esquema del diseño de los modelos de la base de datos} \label{fig:dbAr1}
 \end{figure}
+
+\end{comment}
