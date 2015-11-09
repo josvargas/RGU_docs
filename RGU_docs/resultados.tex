@@ -1,10 +1,24 @@
 \chapter{Resultados}
 
+\section{Pruebas en los distintos rangos de bits de entrada}
 
+Al emplear el modulo de FixedPointSquareRoot se logra aumentar el dominio de cobertura a la entrada del modulo del RGU, pero dicho módulo aumenta el error al hacer una estimación ya que hace un corrimiento hacia la derecha de los 8 bits menos significativos de la parte entera de los números de entrada en formato de punto fijo.
 
+Entonces sucede que existe una gran variabilidad respecto a los porcentajes de error dependiendo de los rangos mayores a 7 bits, por ejemplo los casos que son de 8 bits en la primera iteración provocan errores de casi el 50 porciento mientras que los casos de 12 bits poseen un error inferior del 1 porciento ante estímulos seudoaleatorios.
 
+\begin{figure}
+	\includegraphics[width=0.7\linewidth]{images/puntos}
+	\caption{Gráfico sobre los porcentajes de error ante iteraciones con distintos rangos de bits} \label{fig:puntos}
+\end{figure}
 
+En el caso de la figura \ref{fig:puntos} se puede observar que con tres iteraciones el comportamiento de las entradas con 10 bits cambia mucho y para una cuarta iteración más bien sube un poco, lo cual implicaría que más de tres iteraciones en realidad no es necesario para obtener un margen de error apropiado.
 
+Ta 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%  MACHOTE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{comment}
 
 

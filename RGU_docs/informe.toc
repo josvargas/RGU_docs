@@ -37,4 +37,6 @@
 \contentsline {section}{\numberline {3.3}Consideraciones del Punto Fijo}{14}
 \contentsline {section}{\numberline {3.4}Estructura del RGU}{15}
 \contentsline {section}{\numberline {3.5}Instrucciones de iteraci\IeC {\'o}n}{15}
+\contentsline {section}{\numberline {3.6}C\IeC {\'a}lculo de ra\IeC {\'\i }ces con valores de entrada grandes}{16}
 \contentsline {chapter}{\chapternumberline {4}Resultados}{17}
+\contentsline {section}{\numberline {4.1}Pruebas en los distintos rangos de bits de entrada}{17}

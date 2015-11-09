@@ -92,12 +92,21 @@ A continuación se plantean las instrucciones necesarias (en seudocódigo) para 
 \State $\textit{ Multiplique X por S0 y guarde en S1}$
 \State $\textit{ Reste X menos S1 y guarde en S2}$
 \State $\textit{ Multiplique S2 por Ri}$
-\State $\textit{ Desplace un bit a la izquierda a S2 y guarde en Ri}$
+\State $\textit{ Desplace un bit a la derecha a S2 y guarde en Ri}$
 \EndFor
 \State $\textit{ Enviar dato válido}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\section{Cálculo de raíces con valores de entrada grandes}
+
+
+El tamaño de la la tabla LUT es limitado, en el caso de las pruebas realizadas con el RGU se eligió trabajar con una tabla de 128 ($2^7$) valores iniciales para tener un buen estimado del inverso de la raíz cuadrada, lo cual es muy poco en comparación con la totalidad ($2^{15}$).
+
+Por esto se creó un módulo especializado encargado de tomar el número de entrada y dividirlo entre 256 ($2^8$) desplazando el número 8 bits a la derecha, buscar el número más cercano en la tabla y después multiplicarlo por 16 ($2^4$) que es la raíz cuadrada de 256: algo semejante a calcular $\sqrt{256*X/256}=16*\sqrt{X/256}$ 
+
+Con esta técnica se logra aumentar el rango de posibles valores de entrada y salida que iba a experimentar la RGU, y con ello mejorar el dominio de cobertura.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
