@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.19)  9 NOV 2015 01:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.19)  11 NOV 2015 08:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1547,34 +1547,40 @@ LaTeX Info: Redefining \% on input line 98.
 
 
 ] [5]
-LaTeX Info: Redefining \. on input line 83.
-LaTeX Info: Redefining \% on input line 83.
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
  [6]
-Underfull \vbox (badness 1132) has occurred while \output is active []
+Underfull \vbox (badness 4846) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 95.
-LaTeX Info: Redefining \% on input line 95.
+LaTeX Info: Redefining \. on input line 91.
+LaTeX Info: Redefining \% on input line 91.
  [7]
-LaTeX Info: Redefining \. on input line 120.
-LaTeX Info: Redefining \% on input line 120.
+LaTeX Info: Redefining \. on input line 115.
+LaTeX Info: Redefining \% on input line 115.
 
 [8]
-LaTeX Info: Redefining \. on input line 136.
-LaTeX Info: Redefining \% on input line 136.
+Underfull \vbox (badness 6157) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 130.
+LaTeX Info: Redefining \% on input line 130.
  [9]
-LaTeX Info: Redefining \. on input line 189.
-LaTeX Info: Redefining \% on input line 189.
- [10])
+LaTeX Info: Redefining \. on input line 168.
+LaTeX Info: Redefining \% on input line 168.
+
+[10]
+LaTeX Info: Redefining \. on input line 234.
+LaTeX Info: Redefining \% on input line 234.
+ [11])
 LaTeX Info: Redefining \. on input line 102.
 LaTeX Info: Redefining \% on input line 102.
- [11]
+ [12]
 \openout2 = `desarrollo.aux'.
 
- (./desarrollo.tex [12
+ (./desarrollo.tex [13
 
 
 
-] [13]
+]
 LaTeX Info: Redefining \. on input line 64.
 LaTeX Info: Redefining \% on input line 64.
  [14]
@@ -1587,21 +1593,24 @@ LaTeX Info: Redefining \. on input line 105.
 LaTeX Info: Redefining \% on input line 105.
 
 [16]
+LaTeX Info: Redefining \. on input line 105.
+LaTeX Info: Redefining \% on input line 105.
+ [17]
 \openout2 = `resultados.aux'.
 
- (./resultados.tex <images/puntos.png, id=97, 362.10281pt x 218.31563pt>
-File: images/puntos.png Graphic file (type png)
+ (./resultados.tex [18
 
-<use images/puntos.png>
+
+
+]
+<images/puntos.png, id=104, 362.10281pt x 218.31563pt>
+File: images/puntos.png Graphic file (type png)
+ <use images/puntos.png>
 Package pdftex.def Info: images/puntos.png used on input line 10.
 (pdftex.def)             Requested size: 258.29887pt x 155.73137pt.
-) [17
-
-
-
- <./images/puntos.png>]
+) [19 <./images/puntos.png>]
 No file informe.bbl.
-[18
+[20
 
 
 ]
@@ -1630,10 +1639,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 21933 strings out of 493304
- 370584 string characters out of 6139871
+ 21934 strings out of 493304
+ 370599 string characters out of 6139871
  481572 words of memory out of 5000000
- 24775 multiletter control sequences out of 15000+600000
+ 24776 multiletter control sequences out of 15000+600000
  54149 words of font info for 96 fonts, out of 8000000 for 9000
  1053 hyphenation exceptions out of 8191
  69i,15n,59p,1185b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1653,10 +1662,10 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/
 public/cm-super/sfrm1095.pfb>
-Output written on informe.pdf (26 pages, 236865 bytes).
+Output written on informe.pdf (28 pages, 241587 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 111 compressed objects within 2 object streams
+ 164 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -220,3 +220,34 @@ La representación binaria de un número X en punto fijo de 6-bits donde $b=2$, 
 
 \section{Verificación funcional}
 
+\section{Generalidades}
+
+Un ambiente de verificación funcional modela el universo el universo para el diseño y debe soportar toda las acciones que pueden ocurrir sobre él. Este ambiente se conoce como banco de pruebas o “test bench”.
+
+Un ambiente básico de verificación consiste en las siguientes partes:
+
+\begin{itemize}
+\item Diseño bajo verificación (DUV).
+\item Componente de estímulo.
+\item Componente de monitoreo.
+\item Componente de chequeo.
+\item Scoreboard.
+\end{itemize}
+
+\section{Componente de estímulo}
+
+Esta parte del banco de pruebas manipula las entradas del DUV (“driver”) e imita el comportamiento de entidades vecinas.
+La generación de estímulos no deben restringirse
+a lo que el DUV es capaz de recibir; de esta forma se estresa el DUV y se pueden encontrar condiciones límite que solo se pueden ver luego de millones de ciclos una prueba a nivel de sistema. Manipula las entradas del DUV (“driver”).
+
+\section{Componente  de chequeo}
+
+La componente  de chequeo ("checker") es un tipo especial de monitor que solo colecta salidas del DUV encargado de validar que una funcionalidad del diseño se comporta de forma correcta.
+El checker necesita entender el estimulo para predecir el resultado funcional y comparar el resultado actual.
+El checker tiene que revisar que se cumplan los siguientes puntos:
+\begin{itemize}
+\item Todas las respuestas sean recibidas.
+\item Todas las salidas corresponden al valor esperado.
+\item Que no haya actividad sin estimulo.
+\end{itemize}
+

@@ -104,10 +104,17 @@ A continuación se plantean las instrucciones necesarias (en seudocódigo) para 
 
 El tamaño de la la tabla LUT es limitado, en el caso de las pruebas realizadas con el RGU se eligió trabajar con una tabla de 128 ($2^7$) valores iniciales para tener un buen estimado del inverso de la raíz cuadrada, lo cual es muy poco en comparación con la totalidad ($2^{15}$).
 
-Por esto se creó un módulo especializado encargado de tomar el número de entrada y dividirlo entre 256 ($2^8$) desplazando el número 8 bits a la derecha, buscar el número más cercano en la tabla y después multiplicarlo por 16 ($2^4$) que es la raíz cuadrada de 256: algo semejante a calcular $\sqrt{256*X/256}=16*\sqrt{X/256}$ 
+Por esto se creó un módulo llamado FixedPointSquareRoot encargado de tomar el número de entrada y dividirlo entre 256 ($2^8$) desplazando el número 8 bits a la derecha, buscar el número más cercano en la tabla y después multiplicarlo por 16 ($2^4$) que es la raíz cuadrada de 256: algo semejante a calcular $\sqrt{256*X/256}=16*\sqrt{X/256}$ 
 
 Con esta técnica se logra aumentar el rango de posibles valores de entrada y salida que iba a experimentar la RGU, y con ello mejorar el dominio de cobertura.
 
+\section{Modelo del banco de pruebas}
+
+El test bench implementando en esta ocasión solo consiste en una componente que genera las señales de entrada
+para un número de iteraciones específico en método de Newton-Raphson y una componente de chequeo basado en salidas que se encarga de verificar que el comportamiento es el adecuado.
+La componente de chequeo consiste en un archivo de Verilog que imprime las señales en un archivo y un script en python que luego lee el archivo y calcula el error existente entre los números originalmente en punto fijo que salen del RGU y el valor real del inverso de la raíz cuadrada y calcula un error promedio para cada corrida relacionada a un número de iteraciones específico.
+
+Luego se recopila la información de correr cada script y se genera una gráfica que permite tomar decisiones de diseño pertinentes tanto a la precisión del RGU como a la cantidad de instrucciones almacenadas en el espacio de memoria RAM respectiva.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%  MACHOTE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
