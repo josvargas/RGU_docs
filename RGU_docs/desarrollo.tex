@@ -21,7 +21,9 @@ Dentro de los métodos multiplicativos para realizar el cálculo del inverso de 
 
 De estos dos métodos empleados en la aproximación de divisiones se puede observar que el método de Goldschmidt a la hora de adaptarse para el cálculo de la raíz cuadrada adquiere casi la misma forma que el método de Newton-Raphson adaptado a las raíces cuadradas, además que el método de Goldschmidt está diseño para calcular dos iteraciones (el numerador y el denominador) por lo que está más orientado a estructuras que usen de manera intensiva pipeline como la Unidades de Punto Flotante.
 
-Por otra parte los métodos sustractivos como el método SRT implican el uso de muchas estructuras de hardware especializadas que se realizan varias iteraciones de corrimientos para la correcta aproximación de un resultado por lo que además resulta ser un método lento en comparación con los métodos multiplicativos.
+Por otra parte otros métodos llamados sustractivos como el método SRT implican el uso de muchas estructuras de hardware especializadas encargadas de realizar múltiples corrimientos para la correcta aproximación de las raíces por lo que además resulta ser un método lento en comparación con los métodos multiplicativos. 
+
+Por todo lo anterior el método de Newton-Raphson fue elegido entre las opciones existentes.
 
 \section{Operaciones con el método de Newton Raphson}
 
@@ -76,7 +78,7 @@ Por lo anterior se puede apreciar que el RGU tiene la capacidad de programar las
 
 La RGU también tiene una instrucción especial llamada PUSH que  habilita a la cola que hay a la salida del RGU almacenar el valor que se calculó por medio de la tabla (LUT) y las iteraciones.
 
-Por otra parte por el momento las intrucciones del RGU deben ir intercaladas por instrucciones NOP ya que existen "data hazards" (peligros de datos) debido a que no se ha planteado el uso de pipeline en los datos, pero es de fácil implementación, y estará implementado en la versión final del proyecto.
+Por otra parte las intrucciones del RGU al inicio debían ir intercaladas por instrucciones NOP ya que existen "data hazards" (peligros de datos) debido a que no se había planteado el uso de pipeline en los datos, pero en la última versión del código se ha logrado implementar el pipeline dentro proyecto.
 
 \section{Instrucciones de iteración}
 
@@ -112,7 +114,7 @@ Con esta técnica se logra aumentar el rango de posibles valores de entrada y sa
 
 El test bench implementando en esta ocasión solo consiste en una componente que genera las señales de entrada
 para un número de iteraciones específico en método de Newton-Raphson y una componente de chequeo basado en salidas que se encarga de verificar que el comportamiento es el adecuado.
-La componente de chequeo consiste en un archivo de Verilog que imprime las señales en un archivo y un script en python que luego lee el archivo y calcula el error existente entre los números originalmente en punto fijo que salen del RGU y el valor real del inverso de la raíz cuadrada y calcula un error promedio para cada corrida relacionada a un número de iteraciones específico.
+La componente de chequeo consiste en un archivo de Verilog que imprime las señales en un archivo y un script en python que luego lee el archivo y calcula el error existente entre los números en punto fijo que salen del RGU y el valor real del inverso de la raíz cuadrada para luego calcular un error promedio para cada corrida relacionada a un número de iteraciones específico.
 
 Luego se recopila la información de correr cada script y se genera una gráfica que permite tomar decisiones de diseño pertinentes tanto a la precisión del RGU como a la cantidad de instrucciones almacenadas en el espacio de memoria RAM respectiva.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

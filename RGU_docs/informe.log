@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.19)  11 NOV 2015 08:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.19)  15 NOV 2015 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1394,7 +1394,7 @@ LaTeX Info: Redefining \% on input line 8.
 
 LaTeX Warning: Label `ray' multiply defined.
 
-) (./resultados.aux))
+) (./resultados.aux) (./conclusiones.aux))
 \openout1 = `informe.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
@@ -1411,7 +1411,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
 LaTeX Font Info:    ... okay on input line 46.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 46.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 46.
@@ -1517,15 +1518,6 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 (./intro.tex
-
-Package natbib Warning: Citation `Schmittler2004' on page 1 undefined on input 
-line 10.
-
-
-Package natbib Warning: Citation `Nah2014' on page 1 undefined on input line 10
-.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1
@@ -1550,73 +1542,97 @@ LaTeX Info: Redefining \% on input line 98.
 LaTeX Info: Redefining \. on input line 77.
 LaTeX Info: Redefining \% on input line 77.
  [6]
-Underfull \vbox (badness 4846) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 91.
-LaTeX Info: Redefining \% on input line 91.
+LaTeX Info: Redefining \. on input line 89.
+LaTeX Info: Redefining \% on input line 89.
  [7]
-LaTeX Info: Redefining \. on input line 115.
-LaTeX Info: Redefining \% on input line 115.
-
-[8]
-Underfull \vbox (badness 6157) has occurred while \output is active []
-
+LaTeX Info: Redefining \. on input line 113.
+LaTeX Info: Redefining \% on input line 113.
+ [8]
 LaTeX Info: Redefining \. on input line 130.
 LaTeX Info: Redefining \% on input line 130.
  [9]
-LaTeX Info: Redefining \. on input line 168.
-LaTeX Info: Redefining \% on input line 168.
-
-[10]
-LaTeX Info: Redefining \. on input line 234.
-LaTeX Info: Redefining \% on input line 234.
- [11])
+LaTeX Info: Redefining \. on input line 171.
+LaTeX Info: Redefining \% on input line 171.
+ [10]
+LaTeX Info: Redefining \. on input line 240.
+LaTeX Info: Redefining \% on input line 240.
+ [11]
+LaTeX Info: Redefining \. on input line 268.
+LaTeX Info: Redefining \% on input line 268.
+ [12])
 LaTeX Info: Redefining \. on input line 102.
 LaTeX Info: Redefining \% on input line 102.
- [12]
+ [13]
 \openout2 = `desarrollo.aux'.
 
- (./desarrollo.tex [13
+
+(./desarrollo.tex [14
 
 
 
-]
-LaTeX Info: Redefining \. on input line 64.
-LaTeX Info: Redefining \% on input line 64.
- [14]
-Underfull \vbox (badness 1286) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 106.
-LaTeX Info: Redefining \% on input line 106.
- [15])
+] [15]
+LaTeX Info: Redefining \. on input line 65.
+LaTeX Info: Redefining \% on input line 65.
+ [16]
+LaTeX Info: Redefining \. on input line 108.
+LaTeX Info: Redefining \% on input line 108.
+ [17])
 LaTeX Info: Redefining \. on input line 105.
 LaTeX Info: Redefining \% on input line 105.
-
-[16]
+ [18]
 LaTeX Info: Redefining \. on input line 105.
 LaTeX Info: Redefining \% on input line 105.
- [17]
+ [19]
 \openout2 = `resultados.aux'.
 
- (./resultados.tex [18
+ (./resultados.tex [20
 
 
 
 ]
-<images/puntos.png, id=104, 362.10281pt x 218.31563pt>
+<images/Selection_010.png, id=110, 1027.84pt x 163.61125pt>
+File: images/Selection_010.png Graphic file (type png)
+
+<use images/Selection_010.png>
+Package pdftex.def Info: images/Selection_010.png used on input line 12.
+(pdftex.def)             Requested size: 369.00269pt x 71.13037pt.
+
+<images/Selection_011.png, id=111, 1022.82124pt x 199.74625pt>
+File: images/Selection_011.png Graphic file (type png)
+
+<use images/Selection_011.png>
+Package pdftex.def Info: images/Selection_011.png used on input line 21.
+(pdftex.def)             Requested size: 368.99571pt x 71.13138pt.
+ [21 <./images/Selection_010.png>]
+<images/puntos.png, id=115, 362.10281pt x 218.31563pt>
 File: images/puntos.png Graphic file (type png)
  <use images/puntos.png>
-Package pdftex.def Info: images/puntos.png used on input line 10.
+Package pdftex.def Info: images/puntos.png used on input line 32.
 (pdftex.def)             Requested size: 258.29887pt x 155.73137pt.
-) [19 <./images/puntos.png>]
-No file informe.bbl.
-[20
+LaTeX Info: Redefining \. on input line 37.
+LaTeX Info: Redefining \% on input line 37.
 
+[22 <./images/Selection_011.png> <./images/puntos.png>]
+Overfull \hbox (16.84772pt too wide) in paragraph at lines 48--59
+ [][][] 
+ []
+
+)
+LaTeX Info: Redefining \. on input line 108.
+LaTeX Info: Redefining \% on input line 108.
+ [23]
+\openout2 = `conclusiones.aux'.
+
+ (./conclusiones.tex [24
+
+
+
+]) [25] (./informe.bbl [26
+
+
+]) [27] [28
 
 ]
-
-Package natbib Warning: There were undefined citations.
-
 \tf@toc=\write5
 \openout5 = `informe.toc'.
 
@@ -1626,11 +1642,12 @@ Package natbib Warning: There were undefined citations.
 \tf@lot=\write7
 \openout7 = `informe.lot'.
 
+
 (./informe.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
  (./intro.aux) (./marcoteorico.aux) (./desarrollo.aux)
-(./resultados.aux))
+(./resultados.aux) (./conclusiones.aux))
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1639,10 +1656,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 21934 strings out of 493304
- 370599 string characters out of 6139871
- 481572 words of memory out of 5000000
- 24776 multiletter control sequences out of 15000+600000
+ 21997 strings out of 493304
+ 371801 string characters out of 6139871
+ 483438 words of memory out of 5000000
+ 24828 multiletter control sequences out of 15000+600000
  54149 words of font info for 96 fonts, out of 8000000 for 9000
  1053 hyphenation exceptions out of 8191
  69i,15n,59p,1185b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1662,10 +1679,10 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/
 public/cm-super/sfrm1095.pfb>
-Output written on informe.pdf (28 pages, 241587 bytes).
+Output written on informe.pdf (36 pages, 313909 bytes).
 PDF statistics:
- 164 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
+ 191 PDF objects out of 1000 (max. 8388607)
+ 132 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 28 words of extra memory for PDF output out of 10000 (max. 10000000)
 

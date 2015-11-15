@@ -1,5 +1,28 @@
 \chapter{Conclusiones y recomendaciones}
 
+\begin{itemize}
+
+\item Se logró desarrollar apropiadamente un modelo conductual en lenguaje Verilog que permitiera describir el funcionamiento del hardware requerido para la generación de rayos normalizados que estará dentro de la arquitectura del GPU Theia.
+
+\item Se investigó sobre posibles métodos para el cálculo de inversos de raíces cuadradas, en el cual, al final se decidió usar el método de Newton-Raphson.
+
+\item Después del trabajo de investigación se definieron las instrucciones y mecanismo internos que permitirían al módulo de RTL lograr generar vectores normalizados en formato de punto fijo, dentro de distintos grados de precisión dependiendo del número de iteraciones posibiles.
+
+\item Se realizó una verificación funcional básica de la Unidad de Generación de Rayos (RGU) donde se trató de cubrir distintas formas de calcular los inversos de las raíces cuadradas, principalmente variando el número de iteraciones por medio de las instrucciones o variando el dominio (número de bits) que podía tener el valor de la parte entera de los números en punto fijo.
+
+\item El tamaño de las tablas que contienen valor inicial con el que se realiza la iteración inicial en el método de Newton-Raphson definen el error que va a tener una raíz al salir de la Unidad de Generación de Rayos.  
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%  MACHOTE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+
+\chapter{Conclusiones y recomendaciones}
+
 Para finalizar este informe escrito, se expone las conclusiones, se da algunas recomendaciones y se propone trabajo que queda aún por realizar para seguir perfeccionando la herramienta. Las conclusiones se realizan con relación directa a los objetivos tanto el general como los específicos propuestos al inicio del trabajo y los resultados obtenidos luego de la creación de la aplicación y el uso de la misma.
 
 \section*{Conclusiones}
@@ -50,3 +73,5 @@ En vista de que un software nunca alcanza su versión final, siempre hay errores
 \item Ofrecer la posibilidad de descargar los datos generados en diferentes formatos: JSON, YAML, XML, entre otros.
 
 \end{itemize}
+
+\end{comment}

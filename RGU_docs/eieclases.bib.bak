@@ -2,6 +2,56 @@
 % Encoding: Cp1252
 
 
+@Book{Akenine2008,
+  Title                    = {Real-Time Rendering},
+  Author                   = {Akenine-Moller,T. and Haines,E. and Hoffman, N.},
+  Publisher                = {A K Peter},
+  Year                     = {2008},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@MastersThesis{Goldschmidt1964,
+  Title                    = {Applications of Division by Convergence},
+  Author                   = {Goldschmidt, E.},
+  School                   = {Electrical Engineering School M.I.T.},
+  Year                     = {1964},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Article{Markstein2004,
+  Title                    = {Software Division and Square Root Using Goldschmidts Algorithms},
+  Author                   = {Markstein,P.},
+  Journal                  = {Real Number and Computers, Dagstuhl, Germany},
+  Year                     = {2004},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Article{Marques2009,
+  Title                    = {GPU raycasting},
+  Author                   = {Marques,R. and Santos,L. P. and Leskovsky,P. and Paloc,C.},
+  Journal                  = {17 Portuguese Conference on Computer Graphics, Portugal, 2009},
+  Year                     = {2009},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Article{Nah2014,
+  Title                    = {RayCore: A ray-tracing hardware architecture for mobile devices},
+  Author                   = {Nah, J. and KWON, H. and Kim, D. and Jeong, C. and Park, J. and HAN, T. and Manocha, D. and Park, W.},
+  Journal                  = {ACM Transactions on Graphics, Vol. 33},
+  Year                     = {2014},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.09.06}
+}
+
 @Article{Schmittler2004,
   Title                    = {Realtime ray tracing of dynamic scenes on an FPGA chip},
   Author                   = {Schmittler, J. and Woop, S. and Wagner, D. and Paul, W. and Slusallek, P.},
@@ -10,5 +60,70 @@
 
   Owner                    = {josue},
   Timestamp                = {2015.09.06}
+}
+
+@Article{Schulte1999,
+  Title                    = {High-Speed Inverse Square Roots},
+  Author                   = {Schulte,M. and Wires,K.},
+  Journal                  = {14th IEEE Symposium on Computer Arithmetic},
+  Year                     = {1999},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Book{Shirley2009,
+  Title                    = {Fundamentals of Computer Graphics},
+  Author                   = {Shirley,P. and Marschner,S.},
+  Publisher                = {A K Peters},
+  Year                     = {2009},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Article{Soderquist1997,
+  Title                    = {Floating-Point Division and Square Root: Choosing the Right Implementation},
+  Author                   = {Soderquist, P. and Leeser, M.},
+  Journal                  = {IEEE Micro},
+  Year                     = {1997},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Misc{Valverde,
+  Title                    = {Architecture Specification Version 0.1},
+
+  Author                   = {Valverde, D.},
+  Year                     = {2015},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Book{Wile,
+  Title                    = {Comprehensive Functional Verification The Complete Industry Cycle},
+  Author                   = {Wile, B. and Goss, J. and Roesner,W.},
+  Publisher                = {Morgan Kaufmann},
+  Year                     = {2005},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Article{Woop2006,
+  Title                    = {Estimating Performance of a Ray-Tracing ASIC Design},
+  Author                   = {Woop, S. and Brunvand,E. and Slusallek, P.},
+  Journal                  = {IEEE Symposium on Interactive Ray Tracing},
+  Year                     = {2006},
+
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
+}
+
+@Other{,
+  Owner                    = {josue},
+  Timestamp                = {2015.11.15}
 }
 

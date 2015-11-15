@@ -3,45 +3,49 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: informe.aux
 The style file: apalike_es.bst
 A level-1 auxiliary file: intro.aux
+A level-1 auxiliary file: marcoteorico.aux
+A level-1 auxiliary file: desarrollo.aux
+A level-1 auxiliary file: resultados.aux
+A level-1 auxiliary file: conclusiones.aux
 Database file #1: eieclases.bib
-You've used 2 entries,
+You've used 12 entries,
             1935 wiz_defined-function locations,
-            493 strings with 4214 characters,
-and the built_in function-call counts, 906 in all, are:
-= -- 76
-> -- 71
-< -- 0
-+ -- 26
-- -- 26
-* -- 82
-:= -- 177
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 23
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 26
-empty$ -- 41
-format.name$ -- 28
-if$ -- 160
+            554 strings with 5513 characters,
+and the built_in function-call counts, 3995 in all, are:
+= -- 366
+> -- 208
+< -- 6
++ -- 70
+- -- 70
+* -- 311
+:= -- 762
+add.period$ -- 35
+call.type$ -- 12
+change.case$ -- 92
+chr.to.int$ -- 12
+cite$ -- 12
+duplicate$ -- 154
+empty$ -- 242
+format.name$ -- 88
+if$ -- 741
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 2
-newline$ -- 13
-num.names$ -- 6
-pop$ -- 23
+missing$ -- 13
+newline$ -- 62
+num.names$ -- 36
+pop$ -- 96
 preamble$ -- 1
-purify$ -- 23
+purify$ -- 95
 quote$ -- 0
-skip$ -- 21
+skip$ -- 121
 stack$ -- 0
-substring$ -- 24
-swap$ -- 2
+substring$ -- 144
+swap$ -- 10
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
+type$ -- 66
 warning$ -- 0
-while$ -- 4
+while$ -- 24
 width$ -- 0
-write$ -- 26
+write$ -- 145

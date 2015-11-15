@@ -15,7 +15,7 @@ A continuación se mencionan las etapas principales del pipeline de gráficos co
 
 \end{enumerate}
 
-Los conjuntos de datos muy grandes que deben ser visualizados en tres dimensiones normalmente son creados usando representaciones de superficies mediante el dibujo de primitivas geométricas que crean mallas poligonales (en la mayoría de casos son mallas triangulares), pero las técnicas convencionales al usarse en el renderizarizado de datos volumétricos producen pérdidas en la visualización. Las técnicas de  renderización de volumen tienen más información que los métodos de renderización por superficie pero poseen una mayor complejidad y mayores tiempos de renderización.
+Los conjuntos de datos muy grandes que deben ser visualizados en tres dimensiones normalmente son creados usando representaciones de superficies mediante el dibujo de primitivas geométricas que crean mallas poligonales (en la mayoría de casos son mallas triangulares), pero las técnicas convencionales al usarse en el renderizarizado de datos volumétricos producen pérdidas en la visualización. Las técnicas de  renderización de volumen tienen más información que los métodos de renderización por superficie pero poseen una mayor complejidad y mayores tiempos de renderización [\cite{Akenine2008}].
 
 
 \section{Raycasting}
@@ -24,7 +24,7 @@ Se presentan detalles acerca del algoritmo de raycasting en el cual se basa el G
 
 \subsection{Definición}
 
-El algoritmo de raycasting funciona haciendo cálculos a un píxel a la vez, y para cada píxel la tarea básica es encontrar el objeto que es observado en la posición correspondiente a ese píxel en la imagen, o sea parte del observador hacia los objetos a visualizar contrario al método por rasterización. Se puede decir que cada píxel ve en una dirección distinta y cualquier objeto que es observado por un píxel debe intersectar el rayo proveniente desde el punto de vista de la cámara. El objeto esperado es aquel que es intersectado primero por el rayo más cercano a la cámara. Una vez que el objeto es encontrado, se emplea el punto de intersección, la superficie normal, y alguna otra información del objeto para definir el color de cada píxel. 
+El algoritmo de raycasting funciona haciendo cálculos a un píxel a la vez, y para cada píxel la tarea básica es encontrar el objeto que es observado en la posición correspondiente a ese píxel en la imagen, o sea parte del observador hacia los objetos a visualizar contrario al método por rasterización. Se puede decir que cada píxel ve en una dirección distinta y cualquier objeto que es observado por un píxel debe intersectar el rayo proveniente desde el punto de vista de la cámara. El objeto esperado es aquel que es intersectado primero por el rayo más cercano a la cámara. Una vez que el objeto es encontrado, se emplea el punto de intersección, la superficie normal, y alguna otra información del objeto para definir el color de cada píxel [\cite{Shirley2009}]. 
 
 Entonces se puede decir que un algoritmo de raycasting tiene tres partes básicas:
 
@@ -73,9 +73,7 @@ Un seudocódigo sobre el algoritmo de raycasting se muestra se muestra abajo en 
 
 %\end{enumerate}
 
-En términos generales se puede afirmar que la técnica de raycasting evalúa el color de cada pixel en la imagen al disparar un rayo a través de la escena desde la posición del observador. Si el rayo golpea el volumen, el color del pixel es calculado muestreando los datos a lo largo del rayo en un número finito de posiciones en el volumen  y combinando cada resultado en uno solo. Este método tiene una limitación al ejecutarse en los CPUs: para vólumenes de datos grandes el tiempo de renderización para una sola imagen es muy alto para visualización en tiempo real.
-
-\subsection{Transformaciones}
+En términos generales se puede afirmar que la técnica de raycasting evalúa el color de cada pixel en la imagen al disparar un rayo a través de la escena desde la posición del observador. Si el rayo golpea el volumen, el color del pixel es calculado muestreando los datos a lo largo del rayo en un número finito de posiciones en el volumen  y combinando cada resultado en uno solo. Este método tiene una limitación al ejecutarse en los CPUs: para vólumenes de datos grandes el tiempo de renderización para una sola imagen es muy alto para visualización en tiempo real [\cite{Marques2009}].
 
 \section{Arquitecturas con unidades de generación de rayos}
 
@@ -83,21 +81,21 @@ Existen en la literatura pocas referencias a unidades de raycasting o de ray tra
 
 \subsection{SaarCOR}
 
-SaarCOR es el nombre de la unidad de ray tracing que fue diseñado para un chip de uso específico que está conectado por medio de un sistema de bus "host" (huésped) a otros chips que están en la misma placa de computadora. SaarCOR está dividido en tres unidades principales: la unidad de generación de rayos y de "shading" (RGS), el núcleo de ray tracing (RTC) y una unidad de manejo de acceso a memoria (RTC-MI).   
+SaarCOR es el nombre de la unidad de ray tracing que fue diseñado para un chip de uso específico que está conectado por medio de un sistema de bus "host" (huésped) a otros chips que están en la misma placa de computadora. SaarCOR está dividido en tres unidades principales: la unidad de generación de rayos y de "shading" (RGS), el núcleo de ray tracing (RTC) y una unidad de manejo de acceso a memoria (RTC-MI) [\cite{Schmittler2004}]. 
 
 \subsection{DRPU}
 
-DRPU es el diseño y la implementación de un ASIC para procesamiento de ray tracing que posee capacidades de programabilidad similares a un GPU convencional en la universidad de Saarland. La arquitectura consiste en dos partes principales: Unidades de Ray Casting (encargadas de las estructuras espaciales) y un Procesador de "Shading" (encargado de hacer labores de sombreado y de generación de rayos).  
+DRPU es el diseño y la implementación de un ASIC para procesamiento de ray tracing que posee capacidades de programabilidad similares a un GPU convencional en la universidad de Saarland [\cite{Woop2006}]. La arquitectura consiste en dos partes principales: Unidades de Ray Casting (encargadas de las estructuras espaciales) y un Procesador de "Shading" (encargado de hacer labores de sombreado y de generación de rayos).  
 
 \subsection{RayCore}
 
-RayCore es el diseño y la implementación de una unidad de ray tracing para dispositivos móviles y de bajo consumo por parte de miembros de la Universidad de Sejong en Corea del Sur. Dentro de RayCore existen dos unidades principales: una Unidad de Creación de Árboles (TBU) y una Unidad de Ray-Tracing (RTU). Dentro de RTU hay una unidad de generación de rayos tanto primarios como secundarios definidos por la unidad Set-Up y por la unidad de "shading", respectivamente.   
+RayCore es el diseño y la implementación de una unidad de ray tracing para dispositivos móviles y de bajo consumo por parte de miembros de la Universidad de Sejong en Corea del Sur. Dentro de RayCore existen dos unidades principales: una Unidad de Creación de Árboles (TBU) y una Unidad de Ray-Tracing (RTU). Dentro de RTU hay una unidad de generación de rayos tanto primarios como secundarios definidos por la unidad Set-Up y por la unidad de "shading", respectivamente [\cite{Nah2014}].   
 
 %\subsection{Vizard II}
 
 \section{Arquitectura de TheiaV3}
 \subsection{Introducción a TheiaV3}
-TheiaV3 es la tercera iteración del GPU multinúcleo de tipo raycasting Theia. El proyecto Theia es un proyecto de la modalidad Open Source (Código Libre) para experimentar con el hardware gráfico 3D.
+TheiaV3 es la tercera iteración del GPU multinúcleo de tipo raycasting Theia. El proyecto Theia es un proyecto de la modalidad Open Source (Código Libre) para experimentar con el hardware gráfico 3D (\cite{Valverde}].
 
 El principal objetivo del proyecto Theia es proveer un ambiente Open Source incluyendo un código RTL funcional, un ambiente de pruebas y un lenguaje libre de alto nivel y un compilador para programar a Theia.
 
@@ -118,21 +116,21 @@ La Unidad de Generación de Rayos (RGU por sus siglas en inglés) es un módulo 
 La Unidad de Generación de Rayos de TheiaV3 debe realizar la operación del inverso de la raíz cuadrada con el objetivo de normalizar el rayo (vector) visto desde el observador, para lo cual se debe implementar dentro de
 la unidad un mecanismo que permita calcular una aproximación por medio de instrucciones aritméticas simples y de una forma rápida.  A continuación se describen los métodos posibles. 
 
-Existen varios tipos de posibles algoritmos para el cálculo de raíces cuadradas pero en realidad para la implementación en microprocesadores hay pocos, y estos caben en dos categorías: multiplicativos y sustractivos. Los métodos multiplicativos normalmente se implementan en hardware junto con el multiplicador de la unidad de punto flotante y permite realizar operaciones rapidamente, y por otro los métodos sustractivos emplean hardware dedicado a estas operaciones, lo cual incrementa la latencia y los vuelve técnicas más lentas.   
+Existen varios tipos de posibles algoritmos para el cálculo de raíces cuadradas pero en realidad para la implementación en microprocesadores hay pocos, y estos caben en dos categorías: multiplicativos y sustractivos. Los métodos multiplicativos normalmente se implementan en hardware junto con el multiplicador de la unidad de punto flotante y permite realizar operaciones rapidamente, y por otro los métodos sustractivos emplean hardware dedicado a estas operaciones, lo cual incrementa la latencia y los vuelve técnicas más lentas (\cite{Soderquist1997}].   
 
 \subsection{Métodos multiplicativos}
 
-Los algoritmos multiplicativos se suelen emplear para realizar cálculos estimados de raíces cuadradas usando iteraciones a partir de un estimado inicial. Emplear este tipo de técnicas reducen la ejecución de una operación de raíz cuadrada en una serie de multiplicaciones, sustracciones, y corrimientos de bits. Además vale la pena resaltar que estos métodos numéricos convergen cuadráticamente, lo cual implica que un estimado inicial apropiado preciso proporcionará resultados más precisos por cada iteración. Las técnicas empleadas frecuentemente en microprocesadores son los métodos de Newton-Raphson y de Goldschmidt, donde ambos métodos comparte muchos detalles en común pero se diferencian en el orden en que realizan las operaciones.
+Los algoritmos multiplicativos se suelen emplear para realizar cálculos estimados de raíces cuadradas usando iteraciones a partir de un estimado inicial. Emplear este tipo de técnicas reducen la ejecución de una operación de raíz cuadrada en una serie de multiplicaciones, sustracciones, y corrimientos de bits. Además vale la pena resaltar que estos métodos numéricos convergen cuadráticamente, lo cual implica que un estimado inicial apropiado preciso proporcionará resultados más precisos por cada iteración. Las técnicas empleadas frecuentemente en microprocesadores son los métodos de Newton-Raphson y de Goldschmidt, donde ambos métodos comparte muchos detalles en común pero se diferencian en el orden en que realizan las operaciones (\cite{Soderquist1997}].
 
 \subsubsection{Newton-Raphson}
 
-El método de Newton-Raphson es un método iterativo de convergencia cuadrática que emplea multiplicaciones sucesivas para aprovechar las capacidades de multiplicación rápida de los procesadores contemporáneos. 
+El método de Newton-Raphson es un método iterativo de convergencia cuadrática que emplea multiplicaciones sucesivas para aprovechar las capacidades de multiplicación rápida de los procesadores contemporáneos [\cite{Schulte1999}]. 
 
 Al ser Newton-Raphson un método plenamente iterativo, con el objetivo de reducir las iteraciones que se realizan en los cálculos se suele emplear tablas de hardware las cuales se emplean como punto de partida en el proceso de iteraciones.
 
 El método de Newton-Raphson se fundamenta encontrar la mejor aproximación posible al valor de las raíces o ceros de una función F(x) donde $F(x)=0$. 
 
-Entonces mediante el método de Newton-Raphson si se inicia iterando a partir de un valor $X_0$ aproximado al valor deseado, entonces se tiene la expresión \ref{newton_raphson_definition}
+Entonces mediante el método de Newton-Raphson si se inicia iterando a partir de un valor $X_0$ aproximado al valor deseado, entonces se tiene la expresión \ref{newton_raphson_definition}.
 
 
 \begin{align} \label{newton_raphson_definition}
@@ -156,11 +154,11 @@ donde S es el valor de la base de la raíz y $R_{i}$ el valor del cálculo de la
 
 \subsubsection{Goldschmidt}
 
-El método de Goldschmidt para división y aplicada también para raíces cuadradas, surgió de la tesis de graduación de maestría de Ingeniería Eléctrica del MIT por parte de Robert Goldschmidt en 1964. Esta técnica se basa en la aproximación de la raíz cuadrada por medio de productos sucesivos donde si $b_{0}$ es el valor de la base de la raíz cuadrada se busca que se cumpla que $b_{n}=b_{0}Y_{0}Y_{1}...Y_{n}=1$.
+El método de Goldschmidt para división y aplicada también para raíces cuadradas, surgió de la tesis de graduación de maestría de Ingeniería Eléctrica del MIT por parte de Robert Goldschmidt en 1964 [\cite{Goldschmidt1964}]. Esta técnica se basa en la aproximación de la raíz cuadrada por medio de productos sucesivos donde si $b_{0}$ es el valor de la base de la raíz cuadrada se busca que se cumpla que $b_{n}=b_{0}Y_{0}Y_{1}...Y_{n}=1$.
 
 El método de Goldschmidt es ideal para aplicaciones que implementan de forma separada la multiplicación de la suma y en general se emplea en multiplicadores en pipeline. Un detalle de este método es que 
 
-Las ecuaciones \eqref{eq:goldschmidt1} y \eqref{eq:goldschmidt2} son necesarias para el cumplimiento de este método numérico. El método de Goldschmidt, contrario al de Newton, no es autocorregible lo cual implica que existan errores acumulados.
+Las ecuaciones \eqref{eq:goldschmidt1} y \eqref{eq:goldschmidt2} son necesarias para el cumplimiento de este método numérico. El método de Goldschmidt, contrario al de Newton, no es autocorregible lo cual implica que existan errores acumulados [\cite{Markstein2004}].
 
 \begin{equation}
 \label{eq:goldschmidt1}
@@ -198,7 +196,7 @@ Por otra parte, el valor de un número binario de N-bits X, perteneciente al sub
 
 donde $X_n$ representa el bit n del número X. El rango de números que puede tomar como representación el número X es de 0 hasta $(2^{N}-1)/2^{b}=2^{a}-2^{-b}$.
 
-La representación binaria de un número X en punto fijo de 6-bits donde $b=2$, tiene la forma de $x_{3}x_{2}x_{1}x_{0}x_{-1}x_{-2}$.
+La representación binaria de un número X en punto fijo de 6-bits donde la coma está ubicada a 2 bits a la derecha, o sea $b=2$, tiene la forma de $x_{3}x_{2}x_{1}x_{0}x_{-1}x_{-2}$.
 
 %\subsection{Reglas aritméticas}
 
@@ -220,9 +218,9 @@ La representación binaria de un número X en punto fijo de 6-bits donde $b=2$, 
 
 \section{Verificación funcional}
 
-\section{Generalidades}
+\subsection{Generalidades}
 
-Un ambiente de verificación funcional modela el universo el universo para el diseño y debe soportar toda las acciones que pueden ocurrir sobre él. Este ambiente se conoce como banco de pruebas o “test bench”.
+Un ambiente de verificación funcional modela el universo el universo para el diseño y debe soportar toda las acciones que pueden ocurrir sobre él. Este ambiente se conoce como banco de pruebas o “test bench” [\cite{Wile}].
 
 Un ambiente básico de verificación consiste en las siguientes partes:
 
@@ -234,15 +232,15 @@ Un ambiente básico de verificación consiste en las siguientes partes:
 \item Scoreboard.
 \end{itemize}
 
-\section{Componente de estímulo}
+\subsection{Componente de estímulo}
 
 Esta parte del banco de pruebas manipula las entradas del DUV (“driver”) e imita el comportamiento de entidades vecinas.
 La generación de estímulos no deben restringirse
-a lo que el DUV es capaz de recibir; de esta forma se estresa el DUV y se pueden encontrar condiciones límite que solo se pueden ver luego de millones de ciclos una prueba a nivel de sistema. Manipula las entradas del DUV (“driver”).
+a lo que el DUV es capaz de recibir; de esta forma se estresa el DUV y se pueden encontrar condiciones límite que solo se pueden ver luego de millones de ciclos una prueba a nivel de sistema. Manipula las entradas del DUV (“driver”) [\cite{Wile}].
 
-\section{Componente  de chequeo}
+\subsection{Componente de chequeo}
 
-La componente  de chequeo ("checker") es un tipo especial de monitor que solo colecta salidas del DUV encargado de validar que una funcionalidad del diseño se comporta de forma correcta.
+La componente  de chequeo ("checker") es un tipo especial de monitor que solo colecta salidas del DUV encargado de validar que una funcionalidad del diseño se comporta de forma correcta [\cite{Wile}].
 El checker necesita entender el estimulo para predecir el resultado funcional y comparar el resultado actual.
 El checker tiene que revisar que se cumplan los siguientes puntos:
 \begin{itemize}
@@ -251,3 +249,48 @@ El checker tiene que revisar que se cumplan los siguientes puntos:
 \item Que no haya actividad sin estimulo.
 \end{itemize}
 
+\subsection{Scoreboard}
+
+Un scoreboard es una locación temporal que contiene información que el checker puede requerir.
+
+Existen dos formas en que se puede establecer la relación entre el checker y el scoreboard:
+\begin{itemize}
+\item El checker contiene el modelo de referencia y el scoreboard se encarga examinar las entradas para
+almacenar la información necesaria cuando una transacción ocurre. El checker utiliza el modelo de referencia para transformar la información y comparar el resultados esperado con el resultado actual.
+\item En el segundo método, el scoreboard tiene el modelo de referencia y calcula los valores esperados con base en los estímulos. Cuando el checker observa ciertos eventos en el DUV, llama al scoreboard para recibir el valor esperado y comparar.
+\end{itemize}
+
+\subsection{Tipos de checkers}
+
+El trabajo de los “checkers” es asegurar que el DUV se comporta correctamente con base en el estimulo. Existen 4 fuentes principales de checkers:
+\begin{enumerate}
+\item Las entradas y salidas del diseño.
+\item El contexto del diseño.
+\item Las reglas de micro arquitectura del diseño.
+\item La arquitectura del diseño.
+\end{enumerate}
+
+
+\subsubsection{Las entradas y salidas del diseño} 
+
+Cualquier bug en el diseño en algún momento se manifestar a las salidas del diseño. El código de chequeo utiliza las entradas para predecir las salidas. Una inconsistencia ocurre cuando los datos provenientes del  Diseño bajo Verificación no coinciden con los datos de la componente chequeo. 
+
+\subsubsection{El contexto del diseño} 
+
+Cuando se verifica el Lenguaje de Descripción de Hardware (HDL) a bajo nivel es importante para el ingeniero verificador comprender el diseño entender la funcionalidad a alto nivel (por contexto). El ingeniero encargado de verificación debe conocer el proyecto a gran escala aún cuando solo deba encargarse de una específica sección del diseño.
+
+\subsubsection{Las reglas de micro arquitectura del diseño} 
+
+Los verificadores crean muchos de los checkers a partir de propiedades basadas en la microarquitectura o las estructuras internas del diseño, por lo que los ingenieros en verificación deben entender el interior del diseño.  
+
+Se utiliza la especificación de la microarquitectura para definir propiedades como:
+\begin{itemize}
+\item Estados inválidos.
+\item Transiciones invalidas.
+\item Datos inválidos.
+\item Temporización incorrecta de señales de control.
+\item Tamaño de buffers y colas.
+\end{itemize}
+
+\subsubsection{La arquitectura del diseño} 
+Mientras la microarquitectura define las estructuras que componen el diseño, la arquitectura dicta como debe actuar el diseño desde una especificación de alto nivel encargada protocols, unidades de procesamiento programable y estruturas del sistema en general.

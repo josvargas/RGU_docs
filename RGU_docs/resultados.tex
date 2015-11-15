@@ -1,19 +1,80 @@
 \chapter{Resultados}
 
+\section{Prueba inicial revisada por señales de simulador}
+
+En primera instancia es importante recoger señales que permitan verificar que el funcionamiento del dispositivo es el correcto, y que pasa por las operaciones descritas anteriormente en la implementación del método de Newton-Raphson.
+
+En esta sección del trabajo se muestran dos capturas de pantalla que corresponden a ciertas vistas del simulador que emplea el ISE de Xilinx, mostrando las etapas de una iteración del método de Newton-Raphson en el cálculo del inverso de la raíz cuadrada del número 2 en formato de punto fijo.
+
+En la imagen 1 se muestra en wA el valor de entrada correspondiente a 0x400000 que equivale a 2 en representación de punto fijo con la coma corrida 17 espacios hacia la izquierda. Se observa como en la primera instrucción el valor del registro de salida rResult toma el valor 0x16A09 que corresponde al valor de aproximación que provee la tabla de valores iniciales. De hecho el número 0x16A09 equivale en números reales aproximadamente a 0.7070999, esto se sabe al traducir 0x16A09 a decimal y después dividirlo entre $2^{17}$, ya en este caso la escala es igual a 17.  
+
+\begin{figure}
+	\includegraphics[width=1\linewidth, height=2.5cm]{images/Selection_010}
+	\caption{Primera parte de captura de la simulación de señales} \label{fig:sim1}
+\end{figure}
+
+En la imagen 1 se pueden seguir viendo las operaciones que corresponden a los pasos intermedios de multiplicación por los que pasa.
+
+En la imagen 2 se observa que después de realizar las operaciones de multiplicación, resta y desplazamiento se obtiene que en la última operación el registro rResult adquiere el valor de 0x16A0A, equivalente a 0.7071075, lo cual implica que la iteración respecto al valor ini mejoró la aproximación del inverso de la raíz cuadrada pues el valor real es aproximadamente 0.7071067. Lo anterior implica la tendencia de mejorar la precisión siempre y cuando se encuentre un valor inicial cercano al valor meta. 
+
+\begin{figure}
+	\includegraphics[width=1\linewidth, height=2.5cm]{images/Selection_011}
+	\caption{Segunda parte de captura de la simulación de señales} \label{fig:sim2}
+\end{figure}
+
 \section{Pruebas en los distintos rangos de bits de entrada}
 
-Al emplear el módulo de FixedPointSquareRoot se logra aumentar el dominio de cobertura a la entrada del modulo del RGU, pero dicho módulo aumenta el error al hacer una estimación ya que hace un corrimiento hacia la derecha de los 8 bits menos significativos de la parte entera de los números de entrada en formato de punto fijo.
+El  RGU puede tener hasta 15 bits de parte entera pero tiene una tabla de memoria con 128 valores (7 bits) para generar una valor de iteración inicial, entonces se implementó un módulo llamado FixedPointSquareRoot cuya capacidad es aumentar el rango de cobertura de la unidad, pero dicho módulo aumenta el error al hacer una estimación ya que hace un corrimiento hacia la derecha de los 8 bits menos significativos de la parte entera de los números de entrada en formato de punto fijo para poder encontrar un valor en la tabla que abarca solo números de 7 bits (128 posibilidades).
 
-Entonces sucede que existe una gran variabilidad respecto a los porcentajes de error dependiendo de los rangos mayores a 7 bits, por ejemplo los casos que son de 8 bits en la primera iteración provocan errores de casi el 50 porciento mientras que los casos de 12 bits poseen un error inferior del 1 porciento ante estímulos seudoaleatorios.
+Entonces sucede que existe una gran variabilidad respecto a los porcentajes de error dependiendo de los rangos mayores a 7 bits, por ejemplo los casos que son de 8 bits en la primera iteración provocan errores de casi el 50 porciento mientras que los casos de 12 bits poseen un error inferior al 1 porciento ante estímulos seudoaleatorios.
 
 \begin{figure}
 	\includegraphics[width=0.7\linewidth]{images/puntos}
 	\caption{Gráfico sobre los porcentajes de error ante iteraciones con distintos rangos de bits} \label{fig:puntos}
 \end{figure}
 
-En el caso de la figura \ref{fig:puntos} se puede observar que con tres iteraciones el comportamiento de las entradas con 10 bits cambia mucho y para una cuarta iteración más bien sube un poco, lo cual implicaría que más de tres iteraciones en realidad no es necesario para obtener un margen de error apropiado para ese número de iteraciones.
+En el caso de la figura \ref{fig:puntos}, cuya escala en el eje Y es logarítmica, se puede observar, por ejemplo, que con tres iteraciones el comportamiento de las entradas con 10 bits de parte entera cambia mucho y para una cuarta iteración queda literalmente en la misma posición, lo cual implicaría que más de tres iteraciones en realidad no es necesario para obtener un margen de error apropiado para ese número de iteraciones.
 
- 
+En general la tendencia de las entradas con distintos bits es disminuir su porcentaje de error conforme se van aumentando las iteraciones. Solo en los casos de 14 y 15 bits se puede apreciar que se pierde el cáracter de disminución observado en los casos de menor cantidad de bits y más bien se genera un error casi constante, lo cual estaría dado por la incapacidad del hardware de proporcionar valores iniciales más precisos para lo cual se necesitaría tablas con mayor cantidad de valores.
+
+En las tabla \ref{tab:errores1} se puede observar que los porcentajes de error en 8 y 9 bits al iniciar las iteraciones eran bastante altos pero conforme se iteraba se alcanzaba un porcentaje de error más bajo.  
+
+Lo que sucede es que para valores de solo 8 y 9 bits el error inicial es mucho ya que siempre se está haciendo un corrimiento de 8 bits a la parte entera del número. 
+
+% Table generated by Excel2LaTeX from sheet 'Hoja1'
+\begin{table}[htbp]
+  \centering
+  \caption{Tabla de iteraciones de 7 a 12 bits de entrada con su respectivo error}
+    \begin{tabular}{rrrrrrrrr}
+    \toprule
+    7     & 8     & 9     & 10    & 11    & 12\\
+    \midrule
+    0,01031246 & 47,7288136 & 31,2230569 & 13,3993714 & 6,78690633 & 0,86304167\\
+    0,00627204 & 23,9909933 & 13,1553409 & 5,56002376 & 0,94484015 & 0,38862163\\
+    0,00542083 & 5,05170113 & 2,36331935 & 0,09193496 & 0,16717202 & 0,34528176\\
+    0,00393699 & 1,39280231 & 0,79338167 & 0,11496986 & 0,23323379 & 0,32996335\\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:errores1}%
+\end{table}% 
+
+
+% Table generated by Excel2LaTeX from sheet 'Hoja1'
+\begin{table}[htbp]
+  \centering
+  \caption{Tabla de iteraciones de 7 a 12 bits de entrada con su respectivo error}
+    \begin{tabular}{rrrrrrrrr}
+    \toprule
+    13    & 14    & 15 \\
+    \midrule
+    0,77210039 & 1,26359914 & 3,47221991 \\
+    0,98878366 & 1,35671632 & 3,47967437 \\
+    1,0228597 & 1,65155714 & 4,43548373 \\
+    0,89261429 & 1,42975391 & 4,55886896 \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:errores2}%
+\end{table}% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%  MACHOTE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

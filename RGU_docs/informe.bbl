@@ -1,5 +1,25 @@
 \begin{thebibliography}{}
 
+\bibitem[Akenine-Moller et al., 2008]{Akenine2008}
+Akenine-Moller, T., Haines, E., y Hoffman, N. (2008).
+\newblock {\em Real-Time Rendering}.
+\newblock A K Peter.
+
+\bibitem[Goldschmidt, 1964]{Goldschmidt1964}
+Goldschmidt, E. (1964).
+\newblock Applications of division by convergence.
+\newblock Master's thesis, Electrical Engineering School M.I.T.
+
+\bibitem[Markstein, 2004]{Markstein2004}
+Markstein, P. (2004).
+\newblock Software division and square root using goldschmidts algorithms.
+\newblock {\em Real Number and Computers, Dagstuhl, Germany}.
+
+\bibitem[Marques et al., 2009]{Marques2009}
+Marques, R., Santos, L.~P., Leskovsky, P., y Paloc, C. (2009).
+\newblock Gpu raycasting.
+\newblock {\em 17 Portuguese Conference on Computer Graphics, Portugal, 2009}.
+
 \bibitem[Nah et al., 2014]{Nah2014}
 Nah, J., KWON, H., Kim, D., Jeong, C., Park, J., HAN, T., Manocha, D., y Park,
   W. (2014).
@@ -11,5 +31,36 @@ Schmittler, J., Woop, S., Wagner, D., Paul, W., y Slusallek, P. (2004).
 \newblock Realtime ray tracing of dynamic scenes on an fpga chip.
 \newblock {\em Proceedings of the ACM SIGGRAPH/EUROGRAPHICS conference on
   Graphics hardware}.
+
+\bibitem[Schulte y Wires, 1999]{Schulte1999}
+Schulte, M. y Wires, K. (1999).
+\newblock High-speed inverse square roots.
+\newblock {\em 14th IEEE Symposium on Computer Arithmetic}.
+
+\bibitem[Shirley y Marschner, 2009]{Shirley2009}
+Shirley, P. y Marschner, S. (2009).
+\newblock {\em Fundamentals of Computer Graphics}.
+\newblock A K Peters.
+
+\bibitem[Soderquist y Leeser, 1997]{Soderquist1997}
+Soderquist, P. y Leeser, M. (1997).
+\newblock Floating-point division and square root: Choosing the right
+  implementation.
+\newblock {\em IEEE Micro}.
+
+\bibitem[Valverde, 2015]{Valverde}
+Valverde, D. (2015).
+\newblock Architecture specification version 0.1.
+
+\bibitem[Wile et al., 2005]{Wile}
+Wile, B., Goss, J., y Roesner, W. (2005).
+\newblock {\em Comprehensive Functional Verification The Complete Industry
+  Cycle}.
+\newblock Morgan Kaufmann.
+
+\bibitem[Woop et al., 2006]{Woop2006}
+Woop, S., Brunvand, E., y Slusallek, P. (2006).
+\newblock Estimating performance of a ray-tracing asic design.
+\newblock {\em IEEE Symposium on Interactive Ray Tracing}.
 
 \end{thebibliography}
