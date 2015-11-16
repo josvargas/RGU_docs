@@ -4,9 +4,8 @@
 \section{GPU}
 \subsection{Definición}
 
-Las unidades de procesamiento gráfico se encargan de rápidamente renderizar (representar) objetos 3D en forma de píxeles en la pantalla de la computadora, típicamente, por medio de arquitecturas de hardware basadas en la técnica de rasterización. La mayor parte de las GPU han sido diseñadas para realizar operaciones fijas organizadas en forma de pipeline para ir pasando vértices y píxeles a través de distintas etapas.  
-
-A continuación se mencionan las etapas principales del pipeline de gráficos convencional:
+Las unidades de procesamiento gráfico se encargan de rápidamente renderizar (representar) objetos 3D en forma de píxeles en la pantalla de la computadora, típicamente, por medio de arquitecturas de hardware basadas en la técnica de rasterización.
+A continuación se mencionan las etapas principales del pipeline de gráficos convencional [\cite{Akenine2008}]:
 \begin{enumerate}
 
 \item El programa de usuario proporciona los datos al GPU en la forma de primitivas como puntos, líneas y polígonos que describen la geometría 3D. 
@@ -20,7 +19,7 @@ Los conjuntos de datos muy grandes que deben ser visualizados en tres dimensione
 
 \section{Raycasting}
 
-Se presentan detalles acerca del algoritmo de raycasting en el cual se basa el GPU Theia para su funcionamiento.
+A continuación, se presentan detalles acerca del algoritmo de raycasting en el cual se basa el GPU Theia para su funcionamiento.
 
 \subsection{Definición}
 
@@ -36,14 +35,14 @@ Entonces se puede decir que un algoritmo de raycasting tiene tres partes básica
 
 \end{enumerate}
 
-Con el objetivo de generar rayos, primero se necesita una representación matemática de un rayo. Un rayo en realidad es solo un punto de origen y una dirección propagación, una línea paramétrica en 3D que va desde el ojo llamado punto e hasta otro punto s que está en el plano de la imagen está dada por: 
+Con el objetivo de generar rayos, primero se necesita una representación matemática de un rayo. Un rayo en realidad es solo un punto de origen y una dirección propagación. El rayo consiste en una línea paramétrica en 3D que va desde el ojo llamado punto \textit{e}, hasta un segundo punto \textit{s} ubicado en el plano de la imagen. La ecuación del rayo viene dada por:: 
 
 \begin{equation}
 \label{eq:ray_definition}
   p(t) = e+t(s-e)
 \end{equation}
 
-Esta fórmula implica que se empieza en el punto e y se avanza a través del vector s-e hasta llegar al punto p. Valores negativos de t implica que se encuentra el rayo detrás del ojo.
+Esta fórmula implica que se empieza en el punto e y se avanza a través del vector s-e hasta llegar al punto p. Valores negativos de t implican que se encuentra el rayo detrás del ojo.
 
 Un seudocódigo sobre el algoritmo de raycasting se muestra se muestra abajo en el seudocódigo \ref{ray}.
 
@@ -53,7 +52,7 @@ Un seudocódigo sobre el algoritmo de raycasting se muestra se muestra abajo en 
 \Procedure{Ray-cast}{}
 \For $\textit{ cada pixel}$
 \State $\textit{ Construya un rayo desde el ojo}$
-\For $\textit{ para cada objeto en la escena}$
+\For $\textit{ cada objeto en la escena}$
 \State $\textit{ Encuentre la intersección con el rayo}$
 \State $\textit{ Guarde esta intersección si es la más cercana}$
 \EndFor
@@ -73,7 +72,8 @@ Un seudocódigo sobre el algoritmo de raycasting se muestra se muestra abajo en 
 
 %\end{enumerate}
 
-En términos generales se puede afirmar que la técnica de raycasting evalúa el color de cada pixel en la imagen al disparar un rayo a través de la escena desde la posición del observador. Si el rayo golpea el volumen, el color del pixel es calculado muestreando los datos a lo largo del rayo en un número finito de posiciones en el volumen  y combinando cada resultado en uno solo. Este método tiene una limitación al ejecutarse en los CPUs: para vólumenes de datos grandes el tiempo de renderización para una sola imagen es muy alto para visualización en tiempo real [\cite{Marques2009}].
+En términos generales se puede afirmar que la técnica de raycasting evalúa el color de cada pixel en la imagen al disparar un rayo a través de la escena desde la posición del observador. Si el rayo intersecta el volumen, el color del pixel es calculado muestreando los datos a lo largo del rayo en un número finito de posiciones en el volumen  y combinando cada resultado en uno solo. Este método tiene una limitación al ejecutarse en los CPUs: para vólumenes de datos grandes el tiempo de renderización para una sola imagen es muy alto para visualización en tiempo real [\cite{Marques2009}]. En general el algoritmo de ray-casting, se enfoca en las técnicas de mayas para representar superficies para representar objetos.
+
 
 \section{Arquitecturas con unidades de generación de rayos}
 
@@ -97,7 +97,7 @@ RayCore es el diseño y la implementación de una unidad de ray tracing para dis
 \subsection{Introducción a TheiaV3}
 TheiaV3 es la tercera iteración del GPU multinúcleo de tipo raycasting Theia. El proyecto Theia es un proyecto de la modalidad Open Source (Código Libre) para experimentar con el hardware gráfico 3D (\cite{Valverde}].
 
-El principal objetivo del proyecto Theia es proveer un ambiente Open Source incluyendo un código RTL funcional, un ambiente de pruebas y un lenguaje libre de alto nivel y un compilador para programar a Theia.
+El principal objetivo del proyecto Theia es proveer un ambiente Open Source incluyendo un código RTL funcional, un ambiente de pruebas y un lenguaje libre de alto nivel y un compilador para programar a Theia. En el diseño de Theia se plantea, por asuntos de simplicidad de diseño, que utilice el formato de sus datos en punto fijo en vez de emplear punto flotante.
 
 El hardware de Theia es descrito usando código RTL escrito en Verilog 2001. Para realizar una simulación completa del código RTL, se necesita tanto un conjunto de archivos para representan los parámetros de entrada, así como el código de usuario en representación binaria.  
 
@@ -109,14 +109,19 @@ En la figura se muestran los principales bloques funcionales de Theia así como 
 
 \subsection{Unidad de Generación de Rayos}
 
-La Unidad de Generación de Rayos (RGU por sus siglas en inglés) es un módulo de hardware encargado de la generación de las estructuras de datos que representan los rayos que son enviados a los otros módulos encargados de la intersección de los mismos. La RGU tiene un conjunto limitado de operaciones aritméticas así un conjunto de instrucciones propias orientadas a la generación de los rayos por lo que carece de instrucciones de control de flujo.  
+La Unidad de Generación de Rayos (RGU por sus siglas en inglés) es un módulo de hardware encargado de la generación de las estructuras de datos que representan los rayos que son enviados a los otros módulos encargados de la intersección de los mismos. La RGU tiene un conjunto limitado de operaciones aritméticas así un conjunto de instrucciones propias orientadas a la generación de los rayos por lo que carece de instrucciones de control de flujo. En la figura \ref{fig:rgu} se puede ver los bloques principales del RGU donde los azules representan memorias y los verdes bloques de lógica, además a la par de cada flecha se encuentra el nombre que correspondería a ese flujo funcional.
+
+\begin{figure}
+	\includegraphics[width=1\linewidth, height=2.5cm]{images/rgu}
+	\caption{Diagrama de los bloques funcionales del RGU} \label{fig:rgu}
+\end{figure}
 
 \section{Métodos de normalización}
 
 La Unidad de Generación de Rayos de TheiaV3 debe realizar la operación del inverso de la raíz cuadrada con el objetivo de normalizar el rayo (vector) visto desde el observador, para lo cual se debe implementar dentro de
 la unidad un mecanismo que permita calcular una aproximación por medio de instrucciones aritméticas simples y de una forma rápida.  A continuación se describen los métodos posibles. 
 
-Existen varios tipos de posibles algoritmos para el cálculo de raíces cuadradas pero en realidad para la implementación en microprocesadores hay pocos, y estos caben en dos categorías: multiplicativos y sustractivos. Los métodos multiplicativos normalmente se implementan en hardware junto con el multiplicador de la unidad de punto flotante y permite realizar operaciones rapidamente, y por otro los métodos sustractivos emplean hardware dedicado a estas operaciones, lo cual incrementa la latencia y los vuelve técnicas más lentas (\cite{Soderquist1997}].   
+Existen varios tipos de posibles algoritmos para el cálculo de raíces cuadradas pero en realidad para la implementación en microprocesadores hay pocos, y estos caben en dos categorías: multiplicativos y sustractivos. Los métodos multiplicativos normalmente se implementan en hardware junto con el multiplicador de la unidad de punto flotante y permiten realizar operaciones rapidamente, y por otro los métodos sustractivos emplean hardware dedicado a estas operaciones, lo cual incrementa la latencia y los vuelve técnicas más lentas (\cite{Soderquist1997}].   
 
 \subsection{Métodos multiplicativos}
 
@@ -196,7 +201,7 @@ Por otra parte, el valor de un número binario de N-bits X, perteneciente al sub
 
 donde $X_n$ representa el bit n del número X. El rango de números que puede tomar como representación el número X es de 0 hasta $(2^{N}-1)/2^{b}=2^{a}-2^{-b}$.
 
-La representación binaria de un número X en punto fijo de 6-bits donde la coma está ubicada a 2 bits a la derecha, o sea $b=2$, tiene la forma de $x_{3}x_{2}x_{1}x_{0}x_{-1}x_{-2}$.
+La representación binaria de un número X en punto fijo de 6-bits donde la coma está ubicada a 2 bits a la derecha, o sea $b=2$, tiene la forma de $x_{3}x_{2}x_{1}x_{0}x_{-1}x_{-2}$. Por ejemplo en el diseño de Theia se emplea el punto fijo, el cual emplea la coma decimal en el bit 17 para la representanción de los números.
 
 %\subsection{Reglas aritméticas}
 

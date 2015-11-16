@@ -88,8 +88,8 @@ A continuación se plantean las instrucciones necesarias (en seudocódigo) para 
 \caption{Método de Newton-Raphson}\label{ray}
 \begin{algorithmic}[1]
 \Procedure{Newton-Raphson para RN}{}
-\State $\textit{ Busque en X en LUT para hallar R0}$
-\For $\textit{ cada iteración i hasta N}$
+\State $\textit{ Busque X en LUT para hallar R0}$
+\For $\textit{i hasta N}$
 \State $\textit{ Multiplique Ri por Ri y guarde en S0}$
 \State $\textit{ Multiplique X por S0 y guarde en S1}$
 \State $\textit{ Reste X menos S1 y guarde en S2}$
@@ -112,8 +112,8 @@ Con esta técnica se logra aumentar el rango de posibles valores de entrada y sa
 
 \section{Modelo del banco de pruebas}
 
-El test bench implementando en esta ocasión solo consiste en una componente que genera las señales de entrada
-para un número de iteraciones específico en método de Newton-Raphson y una componente de chequeo basado en salidas que se encarga de verificar que el comportamiento es el adecuado.
+El test bench implementando en esta ocasión solo consiste en una componente que genera las señales de entrada seudoaleatorias
+para un número de iteraciones específico en el método de Newton-Raphson y una componente de chequeo basado en salidas que se encarga de verificar que el comportamiento es el adecuado.
 La componente de chequeo consiste en un archivo de Verilog que imprime las señales en un archivo y un script en python que luego lee el archivo y calcula el error existente entre los números en punto fijo que salen del RGU y el valor real del inverso de la raíz cuadrada para luego calcular un error promedio para cada corrida relacionada a un número de iteraciones específico.
 
 Luego se recopila la información de correr cada script y se genera una gráfica que permite tomar decisiones de diseño pertinentes tanto a la precisión del RGU como a la cantidad de instrucciones almacenadas en el espacio de memoria RAM respectiva.
