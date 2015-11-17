@@ -50,9 +50,9 @@ Un seudocódigo sobre el algoritmo de raycasting se muestra se muestra abajo en 
 \caption{Algoritmo de Raycasting}\label{ray}
 \begin{algorithmic}[1]
 \Procedure{Ray-cast}{}
-\For $\textit{ cada pixel}$
+\For{$\textit{ cada pixel}$}
 \State $\textit{ Construya un rayo desde el ojo}$
-\For $\textit{ cada objeto en la escena}$
+\For{$\textit{ cada objeto en la escena}$}
 \State $\textit{ Encuentre la intersección con el rayo}$
 \State $\textit{ Guarde esta intersección si es la más cercana}$
 \EndFor
@@ -112,7 +112,7 @@ En la figura se muestran los principales bloques funcionales de Theia así como 
 La Unidad de Generación de Rayos (RGU por sus siglas en inglés) es un módulo de hardware encargado de la generación de las estructuras de datos que representan los rayos que son enviados a los otros módulos encargados de la intersección de los mismos. La RGU tiene un conjunto limitado de operaciones aritméticas así un conjunto de instrucciones propias orientadas a la generación de los rayos por lo que carece de instrucciones de control de flujo. En la figura \ref{fig:rgu} se puede ver los bloques principales del RGU donde los azules representan memorias y los verdes bloques de lógica, además a la par de cada flecha se encuentra el nombre que correspondería a ese flujo funcional.
 
 \begin{figure}
-	\includegraphics[width=1\linewidth, height=2.5cm]{images/rgu}
+	\includegraphics[width=1\linewidth]{images/rgu}
 	\caption{Diagrama de los bloques funcionales del RGU} \label{fig:rgu}
 \end{figure}
 
