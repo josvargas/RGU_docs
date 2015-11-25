@@ -77,7 +77,9 @@ En términos generales se puede afirmar que la técnica de raycasting evalúa el
 
 \section{Arquitecturas con unidades de generación de rayos}
 
-Existen en la literatura pocas referencias a unidades de raycasting o de ray tracing (variante del algoritmo de ray casting que genera rayos secundarios por medio de la recursión en el punto de incidencia del rayo original) que mencionen explícitamente dentro de su arquitectura la implementación de unidades de generación de rayos, las principales referencias son dos proyectos de hardware provenientes de la Universidad de Saarland: SaarCOR y DRPU. En los artículos no se mencionan detalles de cómo se implementaron unidades de generación de rayos, solo se hablan de ellas de forma muy general.
+Existen en la literatura pocas referencias a unidades de raycasting o de ray tracing (variante del algoritmo de ray casting que genera rayos secundarios por medio de la recursión en el punto de incidencia del rayo original) que mencionen explícitamente dentro de su arquitectura la implementación de unidades de generación de rayos, las principales referencias son dos proyectos de hardware provenientes de la Universidad de Saarland (SaarCOR y DRPU) y RayCore de la Universidad de Sejong (\cite{Nah2014}).  En los artículos no se mencionan detalles de cómo se implementaron unidades de generación de rayos, solo se hablan de ellas de forma muy general.
+
+En el caso de la GPU de tipo raycasting Theia, las especificaciones arquitectónicas indican la necesidad de una Unidad de Generación de Rayos (RGU, por sus siglas en inglés). La RGU debe poseer un conjunto de instrucciones necesarias para el cálculo de la normalización de vectores tridimensionales empleados en las siguientes etapas de funcionamiento del GPU.
 
 \subsection{SaarCOR}
 
@@ -99,11 +101,11 @@ TheiaV3 es la tercera iteración del GPU multinúcleo de tipo raycasting Theia. 
 
 El principal objetivo del proyecto Theia es proveer un ambiente Open Source incluyendo un código RTL funcional, un ambiente de pruebas y un lenguaje libre de alto nivel y un compilador para programar a Theia. En el diseño de Theia se plantea, por asuntos de simplicidad de diseño, que utilice el formato de sus datos en punto fijo en vez de emplear punto flotante.
 
-El hardware de Theia es descrito usando código RTL escrito en Verilog 2001. Para realizar una simulación completa del código RTL, se necesita tanto un conjunto de archivos para representan los parámetros de entrada, así como el código de usuario en representación binaria.  
+El hardware de Theia es descrito usando código RTL escrito en Verilog 2001. Para realizar una simulación completa del código RTL, se necesita tanto un conjunto de archivos que representan los parámetros de entrada, así como el código de usuario en representación binaria.  
 
 \subsection{Descripción general del sistema}
 
-Theia es una unidad de procesamiento gráfico (GPU) multinúcleo, que se encuentra compuesto de distintos bloques que interactúan entre ellos con la finalidad de renderizar cuadros de imágenes.
+Theia es una unidad de procesamiento gráfico (GPU) multinúcleo, que tiene distintos bloques que interactúan entre ellos con la finalidad de renderizar cuadros de imágenes.
 
 En la figura se muestran los principales bloques funcionales de Theia así como la memoria principal que se encuentra en el exterior del GPU. La memoria principal es una memoria de tipo RAM que es empleada para almacenar las variables geométricas, el código, entre otros detalles.
 
@@ -225,7 +227,7 @@ La representación binaria de un número X en punto fijo de 6-bits donde la coma
 
 \subsection{Generalidades}
 
-Un ambiente de verificación funcional modela el universo el universo para el diseño y debe soportar toda las acciones que pueden ocurrir sobre él. Este ambiente se conoce como banco de pruebas o “test bench” [\cite{Wile}].
+Un ambiente de verificación funcional modela el universopara el diseño y debe soportar toda las acciones que pueden ocurrir sobre él. Este ambiente se conoce como banco de pruebas o “test bench” [\cite{Wile}].
 
 Un ambiente básico de verificación consiste en las siguientes partes:
 
@@ -260,7 +262,7 @@ Un scoreboard es una locación temporal que contiene información que el checker
 
 Existen dos formas en que se puede establecer la relación entre el checker y el scoreboard:
 \begin{itemize}
-\item El checker contiene el modelo de referencia y el scoreboard se encarga examinar las entradas para
+\item El checker contiene el modelo de referencia y el scoreboard se encarga de examinar las entradas para
 almacenar la información necesaria cuando una transacción ocurre. El checker utiliza el modelo de referencia para transformar la información y comparar el resultados esperado con el resultado actual.
 \item En el segundo método, el scoreboard tiene el modelo de referencia y calcula los valores esperados con base en los estímulos. Cuando el checker observa ciertos eventos en el DUV, llama al scoreboard para recibir el valor esperado y comparar.
 \end{itemize}
@@ -278,7 +280,7 @@ El trabajo de los “checkers” es asegurar que el DUV se comporta correctament
 
 \subsubsection{Las entradas y salidas del diseño} 
 
-Cualquier bug en el diseño en algún momento se manifestar a las salidas del diseño. El código de chequeo utiliza las entradas para predecir las salidas. Una inconsistencia ocurre cuando los datos provenientes del  Diseño bajo Verificación no coinciden con los datos de la componente chequeo. 
+Cualquier bug en el diseño en algún momento se debe manifestar a las salidas del diseño. El código de chequeo utiliza las entradas para predecir las salidas. Una inconsistencia ocurre cuando los datos provenientes del  Diseño bajo Verificación no coinciden con los datos de la componente chequeo. 
 
 \subsubsection{El contexto del diseño} 
 

@@ -74,11 +74,11 @@ La resta de números en punto fijo permanece intacta ya que se mantiene igual el
 
 La Unidad de Generación de Rayos (RGU) usa dos instancias de memorias: una para las intrucciones y otra para el almacenamiento de datos. La tarjeta Papilio que ha implementado el modelo del GPU Theia posee una memoria DRAM lo cual facilitaría enormemente el acceso a memoria y permitiría al dispositivo tener una mayor programabilidad.
 
-Por lo anterior se puede apreciar que el RGU tiene la capacidad de programar las instrucciones básicas que tiene así como su orden, con el objetivo de permitir la experimentación del dispositivo así como explotar las capacidades de debugging que posee las instrucciones del GPU Theia por medio de la comunicación serial que tiene gracias debido a un IP de Xilinx.
+Por lo anterior se puede apreciar que el RGU tiene la capacidad de programar las instrucciones básicas que tiene así como su orden, con el objetivo de permitir la experimentación del dispositivo así como explotar las capacidades de debugging que posee las instrucciones del GPU Theia por medio de comunicación serial.
 
 La RGU también tiene una instrucción especial llamada PUSH que  habilita a la cola que hay a la salida del RGU almacenar el valor que se calculó por medio de la tabla (LUT) y las iteraciones.
 
-Por otra parte las intrucciones del RGU al inicio debían ir intercaladas por instrucciones NOP ya que existen "data hazards" (peligros de datos) debido a que no se había planteado el uso de pipeline en los datos, pero en la última versión del código se ha logrado implementar el pipeline dentro proyecto.
+Actualmente el RGU tiene pipeline de instrucciones que le permite evitar los peligros de datos (\textit{data hazards}) pues  inicialmente se necesitaban colocar instrucciones NOP intermedias ("búrbujas") para lograr que los cálculos realizados en la instrucciones se pudieran guardar apropiadamente, ahora se hace \textit{forwarding} de los datos de la intrucción actual a la siguiente instrucción en caso de dependencia de datos en los registros.
 
 \section{Instrucciones de iteración}
 
@@ -103,10 +103,7 @@ A continuación se plantean las instrucciones necesarias (en seudocódigo) para 
 
 \section{Cálculo de raíces con valores de entrada grandes}
 
-
-El tamaño de la la tabla LUT es limitado, en el caso de las pruebas realizadas con el RGU se eligió trabajar con una tabla de 128 ($2^7$) valores iniciales para tener un buen estimado del inverso de la raíz cuadrada, lo cual es muy poco en comparación con la totalidad ($2^{15}$).
-
-Por esto se creó un módulo llamado FixedPointSquareRoot encargado de tomar el número de entrada y dividirlo entre 256 ($2^8$) desplazando el número 8 bits a la derecha, buscar el número más cercano en la tabla y después multiplicarlo por 16 ($2^4$) que es la raíz cuadrada de 256: algo semejante a calcular $\sqrt{256*X/256}=16*\sqrt{X/256}$ 
+Inicialmente se eligió trabajar con una tabla de 128 ($2^7$) valores pero se debe abarcar el espacio de ($2^15$) posibles valores enteros, debido a tal necesidad de abarcar el resto de números se creó un módulo llamado FixedPointSquareRoot encargado de tomar el número de entrada y dividirlo entre 256 ($2^8$) desplazando el número 8 bits a la derecha, buscar el número más cercano en la tabla y después multiplicarlo por 16 ($2^4$) que es la raíz cuadrada de 256: algo semejante a calcular $\sqrt{256*X/256}=16*\sqrt{X/256}$ 
 
 Con esta técnica se logra aumentar el rango de posibles valores de entrada y salida que iba a experimentar la RGU, y con ello mejorar el dominio de cobertura.
 
