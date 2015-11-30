@@ -1,6 +1,6 @@
 \select@language {spanish}
-\contentsline {chapter}{\'{I}ndice de figuras}{vi}
-\contentsline {chapter}{\IeC {\'I}ndice de tablas}{vii}
+\contentsline {chapter}{\'{I}ndice de figuras}{vii}
+\contentsline {chapter}{\IeC {\'I}ndice de tablas}{viii}
 \contentsline {chapter}{\chapternumberline {1}Introducci\IeC {\'o}n}{1}
 \contentsline {section}{\numberline {1.1}Justificaci\IeC {\'o}n}{1}
 \contentsline {section}{\numberline {1.2}Alcances del proyecto}{2}
@@ -50,5 +50,6 @@
 \contentsline {chapter}{\chapternumberline {4}Resultados}{23}
 \contentsline {section}{\numberline {4.1}Prueba inicial revisada por se\IeC {\~n}ales de simulador}{23}
 \contentsline {section}{\numberline {4.2}Pruebas en los distintos rangos de bits de entrada}{24}
-\contentsline {chapter}{\chapternumberline {5}Conclusiones y recomendaciones}{27}
-\contentsline {chapter}{Bibliograf\'{\i }a}{29}
+\contentsline {section}{\numberline {4.3}Pruebas con una tabla distinta}{25}
+\contentsline {chapter}{\chapternumberline {5}Conclusiones y recomendaciones}{29}
+\contentsline {chapter}{Bibliograf\'{\i }a}{31}
