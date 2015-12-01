@@ -2,15 +2,15 @@
 
 \begin{itemize}
 
-\item Se investigó sobre posibles métodos para el cálculo de inversos de raíces cuadradas, en el cual, al final se decidió usar el método de Newton-Raphson y se descubrió  en la bibliografía que este método es ampliamente utilizado en las distintas arquitecturas de hardware como las Unidades de Punto Flotante (FPU) [\cite{Soderquist1997}].
+\item Se investigó sobre posibles métodos para el cálculo de inversos de raíces cuadradas, de los cuales, al final se decidió usar el método de Newton-Raphson y se descubrió  en la bibliografía que este método es ampliamente utilizado en la implemetación de instrucciones de ciertas arquitecturas de hardware como las Unidades de Punto Flotante (FPU) [\cite{Soderquist1997}].
 
 \item Se logró desarrollar apropiadamente un modelo conductual en lenguaje Verilog que permite describir el funcionamiento del hardware para la generación de rayos normalizados que estará dentro de la arquitectura del GPU Theia, donde se logró investigar acerca de los tamaños de los números en punto fijo necesarios para el funcionamiento óptimo de la arquitectura.
 
-\item Después de distintas pruebas se logró determinar que el método de Newton-Raphson produce valores de errores bajos con 4 o 6 iteraciones, y aunque con 6 iteraciones se logra el valor menor implica 10 instrucciones respecto a las 4 iteraciones del método, por lo que si se decide que el diseño sea más rápido se escoja solo iterar 4 veces. Aunque en general 32 ciclos en el cálculo del inverso de la raíz cuadrada es menor a los 60 ciclos de reloj que emplean algunas Unidades de Punto Flotante en tales cálculos [\cite{Soderquist1997}]. 
+\item Después de distintas pruebas se logró determinar que el método de Newton-Raphson produce valores de errores bajos con 4 o 6 iteraciones, y si se elige usar el método con 4 iteraciones del método el diseño sería más rápido en al menos diez ciclos de reloj. Aunque en general los 32 ciclos que dura en el cálculo con 6 iteraciones en el cálculo del inverso de la raíz cuadrada es menor a los 60 ciclos de reloj que emplean algunas Unidades de Punto Flotante en tales cálculos [\cite{Soderquist1997}]. 
 
 \item Se realizó una verificación funcional básica de la Unidad de Generación de Rayos (RGU) donde se trató de cubrir distintas formas de calcular los inversos de las raíces cuadradas, principalmente variando el número de iteraciones por medio de las instrucciones o variando el dominio (número de bits) que podía tener el valor de la parte entera de los números en punto fijo.
 
-\item Se crearon en general 32 bancos de prueba con sus respectivas componentes de generación y chequeo para probar distintos escenarios donde la precisión del cálculo de la Unidad de Generación de Rayos estaba a prueba para observar su comportamiento general y tomar decisiones como detener el número de iteraciones en 3.  
+\item Se crearon en general 32 bancos de prueba con sus respectivas componentes de generación y chequeo para probar distintos escenarios donde la precisión del cálculo de la Unidad de Generación de Rayos estaba a prueba para observar su comportamiento general.  
 
 \item Se mejoró considerablemente el porcentaje de error promedio a la salida de la RGU al emplear una tabla de valores iniciales en punto fijo con la coma corrida más hacia la izquierda (pasar de la posición 17 a la 21), ya que el módulo encargado de ajustar la escala de los bits de entrada no tenía que realizar tantos corrimientos para ajustar los valores al tamaño de la tabla y así se aproximaban mejor los números de manera inicial. 
 

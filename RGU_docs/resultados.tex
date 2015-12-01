@@ -46,7 +46,7 @@ En la imagen 2 se observa que después de realizar las operaciones de multiplica
 
 \section{Pruebas en los distintos rangos de bits de entrada}
 
-El  RGU inicialmente emplea números de 32 bits con 15 bits de parte entera. La parte entera de estos números se emplea como valor de entrada a una tabla de memoria con 128 valores (7 bits). La tabla de memoria está encargada de generar una valor de iteración inicial, por lo que se implementó un módulo llamado FixedPointSquareRoot cuya capacidad es aumentar el rango de cobertura de la unidad, pero dicho módulo aumenta el error al hacer una estimación ya que hace un corrimiento hacia la derecha de los 8 bits menos significativos de la parte entera de los números en punto fijo para poder encontrar un valor en la tabla que abarca solo números de 7 bits (128 posibilidades).
+El  RGU inicialmente emplea números de 32 bits con 15 bits de parte entera. La parte entera de estos números se emplea como valor de entrada a una tabla de memoria con 128 valores (7 bits). La tabla de memoria está encargada de generar un valor de iteración inicial, por lo que se implementó un módulo llamado FixedPointSquareRoot cuya finalidad es aumentar el rango de cobertura de la RGU, pero dicho módulo aumenta el error al hacer una estimación ya que hace un corrimiento hacia la derecha de los 8 bits menos significativos de la parte entera de los números en punto fijo para poder encontrar un valor en la tabla que abarca solo números de 7 bits (128 posibilidades).
 
 \begin{figure}
 	\includegraphics[width=0.7\linewidth]{images/puntos}
@@ -101,9 +101,9 @@ Sucede que en valores de entrada de solo 8 y 9 bits el error inicial es mucho ya
 
 En esta sección se creó una nueva tabla de aproximación con 128 valores de punto fijo, cada uno con 21 bits de parte decimal y 11 bits de parte entera.  
 
-En esta ocasión se modificó el módulo SquareRoot de modo que a la parte entera de la entrada en punto fijo solamente se le hiciera un corrimiento hacia la derecha de cuatro bits si los cuatro bits eran iguales a cero. Después de la realización del corrimiento se evaluaba en la tabla las entradas cuyo rango de valores oscilaba entre 7 y 11 bits en las distintas corridas, la gráfica de las simulaciones se puede observar en la figura \ref{fig:puntos2}.
+En esta ocasión se modificó el módulo SquareRoot de modo que la parte entera en punto fijo solamente se le hiciera un corrimiento hacia la derecha de cuatro bits si los cuatro bits más significativos eran iguales a cero. Después de la realización del corrimiento se evaluaba en la tabla las entradas cuyo rango de valores oscilaba entre 7 y 11 bits en las distintas corridas, la gráfica de las simulaciones se puede observar en la figura \ref{fig:puntos2}.
 
-Así se realizaron corridas de hasta siete iteraciones del método de Newton-Raphson para valores de entrada de 7, 8, 9, 10 y 11 bits, con ello se crearon simulaciones que reflejan como los porcentajes de error son mucho menores (inferiores 0.1 porciento) que los que existían anteriormente pues antes en rangos de ocho bits al inicio habían errores de hasta el 50 porciento, la tabla de errores de estas simulaciones se puede apreciar en la tabla \ref{tab:erroresTable}. Los valores más bajos de porcentaje de error promedio se encuentra al iterar 6 veces en el método, lo cual implica 32 ciclos de reloj y el uso de 31 instrucciones. 
+Así se realizaron corridas de hasta siete iteraciones del método de Newton-Raphson para valores de entrada de 7, 8, 9, 10 y 11 bits, con ello se crearon simulaciones que reflejan porcentajes de error mucho menores (inferiores 0.1 porciento) que los que existían anteriormente pues antes en rangos de ocho bits en la primer iteración habían errores de hasta el 50 porciento, la tabla de errores de estas simulaciones se puede apreciar en la tabla \ref{tab:erroresTable}. Los valores más bajos de porcentaje de error promedio se encuentra al iterar 6 veces en el método, lo cual implica 32 ciclos de reloj y el uso de 31 instrucciones. 
 
 \begin{figure}
 	\includegraphics[width=0.7\linewidth]{images/puntos2}
