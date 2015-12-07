@@ -1,6 +1,7 @@
 \select@language {spanish}
-\contentsline {chapter}{\'{I}ndice de figuras}{vii}
-\contentsline {chapter}{\IeC {\'I}ndice de tablas}{viii}
+\contentsline {chapter}{\'{I}ndice de figuras}{ix}
+\contentsline {chapter}{\IeC {\'I}ndice de tablas}{x}
+\contentsline {chapter}{Nomenclatura}{xi}
 \contentsline {chapter}{\chapternumberline {1}Introducci\IeC {\'o}n}{1}
 \contentsline {section}{\numberline {1.1}Justificaci\IeC {\'o}n}{1}
 \contentsline {section}{\numberline {1.2}Alcances del proyecto}{2}

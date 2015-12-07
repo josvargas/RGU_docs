@@ -1,27 +1,29 @@
-\begin{center}\huge{\textbf{Dedicatoria}}\end{center}
+%\begin{center}\huge{\textbf{Dedicatoria}}\end{center}
 
-Dedico este proyecto a las siguientes personas:
-\begin{itemize} 
-	\item A mi mamá, que siempre ha sido y siempre será mi principal apoyo no importa cual sea la situación.
-	\item A mi abuelita, Tita, porque ser más que una segunda mamá.
-	\item A mi papá, por estar cuando lo necesito.
-	\item A todos los familiares y amigos que me apoyaron, que inclusive creyeron en mi cuando yo dudaba.  
-\end{itemize}
+%Dedico este proyecto a las siguientes personas:
+%\begin{itemize} 
+%	\item A mis papás, que por ellos hago todo.
+%	\item A mi familia por creer en mí.
+%	\item A mis amigos por acompañarme en el camino.
+%    \item A la vida que me ha dado tanto. 
+%\end{itemize}
 
-\cleardoublepage
+%\cleardoublepage
 
-\begin{center}\huge{\textbf{Reconocimientos}}\end{center}
+%\begin{center}\huge{\textbf{Reconocimientos}}\end{center}
 
-Agradezco a mi profesor guía,  Dr. rer. nat Francisco Siles Canales, por su apoyo, los consejos, las regañadas y por la amistad. También agradezco a mis profesores lectores, MSc. Juan Carlos Saborío Morales, y Dr. Lochi Yu Lo, por su apoyo, conversaciones inspiradoras y consejos cuando más lo necesité.
+%Agradezco a mi profesor guía, MSc. Diego Valverde Garro por darme la oportunidad de conocer su proyecto personal THEIA, mi trabajo se finalizó gracias a sus explicaciones y paciencia.
 
-\cleardoublepage
+%\cleardoublepage
 
 \begin{center}\huge{\textbf{Resumen}}\end{center}
 
 %--------------------------------------------------------------------
 
-En el siguiente documento se describe la creación de una aplicación web para la generación de datos de validación para el análisis de videos digitales. El trabajo nace a partir de la necesidad constante del Laboratorio de Reconocimiento de Patrones y Sistemas Inteligentes de la Escuela de Ingeniería Eléctrica de la Universidad de Costa Rica (PRIS-Lab) por generar datos para la validación de diferentes algoritmos que manipulan imágenes y videos digitales y la falta de una herramienta competente para realizar dicha labor de manera rápida y sencilla. Además, se impulsa el proyecto mediante el apoyo del CNCA y como un aporte relevante al proyecto de investigación titulado \textbf{Rastreo automatizado de jugadores de fútbol a partir de señales de televisión}, inscrito en la \vinv de la \ucr bajo el código \textit{322-B2-269} para poder validar los diferentes algoritmos allí propuestos, diseñados e implementados.\\
+En el siguiente documento se lleva a cabo la descripción de un código en lenguaje Verilog encargado de la generación de rayos que estará dentro de la arquitectura del proyecto de código libre llamado GPU THEIA. Este módulo debe poseer un conjunto de instrucciones de modo que pueda realizar los cálculos necesarios para la normalización de los vectores que llegan como entrada al GPU desde memoria, por ello debe poseer la capacidad de aproximar el valor del inverso de las raíces cuadradas.  
 
-La implementación de una primera versión de la aplicación denominada GT-Tool se realiza haciendo uso de diferentes frameworks para desarrollo web como lo son AngularJS, NodeJS y LoopBack. Incluye la descripción de las diferentes tecnologías y bibliotecas que son utilizadas hoy en día para el desarrollo web en la industria y se llega a la conclusión de cuales utilizar para el desarrollo del proyecto. El informe detalla los modos de funcionamiento de la aplicación, y las diferentes consideraciones en el diseño del frontend, backend y la base de datos. Al final del desarrollo, se obtiene una aplicación web funcional, multiplataforma gracias a su desarrollo en web, que además aprovecha los beneficios de las bases de datos NO-SQL, como MongoDb, y los servidores asincrónicos como los implementados en el framework de NodeJS.\\
+El conjunto de instrucciones de la Unidad de Generación de Rayos (\textit{RGU}, por sus siglas en inglés) implementa un método numérico para la aproximación del inverso de la raíz cuadrada después de obtener una primer aproximación proveniente de una tabla que almacena un número limitado de valores. El formato de los números que manipula la Unidad de Generación de Rayos es punto fijo.
 
-Se concluye, al final, que se logró desarrollar correctamente la aplicación para la tarea encomendada, que soluciona la mayoría de los problemas que presentan las herramientas que se puede utilizar en la actualidad para desempeñar dicha función. Sin embargo, se destaca que el estado actual de la tecnología en los navegadores web no es la más apta para labores de este tipo, por lo que se requiere implementar un navegador o una biblioteca que elimine el requerimiento de la carga total del video para poder manipularlo de manera completa y se dan recomendaciones de los próximos pasos a seguir para la segunda versión de la aplicación.
+Además se implementa un submódulo que realiza aproximaciones para valores superiores no presentes en la tabla, debido a la limitación del hardware, para ello se estudia el efecto de realizar múltiples iteraciones en la aproximación de los inversos de raíces cuadradas al obtener aproximaciones que al inicio se alejan considerablemente del valor esperado.
+
+Por último se estudia el efecto de la variación de la coma en el formato de los números en punto fijo con la finalidad de obtener un diseño con porcentajes de error del orden de 0.001 \% en la generación de rayos.

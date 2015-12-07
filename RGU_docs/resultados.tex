@@ -8,7 +8,7 @@ Se corrieron 32 pruebas con distintas variaciones en los bancos de prueba, donde
 
 En esta sección del trabajo se muestran dos capturas de pantalla que corresponden a ciertas vistas del simulador que emplea el ISE de Xilinx, mostrando las etapas de una iteración del método de Newton-Raphson en el cálculo del inverso de la raíz cuadrada del número 2 en formato de punto fijo con escala 17.
 
-En la imagen 1 se muestra en wA el valor de entrada correspondiente a 0x400000 que equivale a 2 en representación de punto fijo con la coma corrida 17 espacios hacia la izquierda. Se observa como en la primera instrucción el valor del registro de salida rResult toma el valor 0x16A09 que corresponde al valor de aproximación que provee la tabla de valores iniciales. De hecho el número 0x16A09 equivale en números reales aproximadamente a 0.7070999, esto se sabe al traducir 0x16A09 a decimal y después dividirlo entre $2^{17}$, ya en este caso la escala es igual a 17.  
+En la imagen \ref{tab:nombres} se muestra en wA el valor de entrada correspondiente a 0x400000 que equivale a 2 en representación de punto fijo con la coma corrida 17 espacios hacia la izquierda. Se observa como en la primera instrucción el valor del registro de salida rResult toma el valor 0x16A09 que corresponde al valor de aproximación que provee la tabla de valores iniciales. De hecho el número 0x16A09 equivale en números reales aproximadamente a 0.7070999, esto se sabe al traducir 0x16A09 a decimal y después dividirlo entre $2^{17}$, ya en este caso la escala es igual a 17.  
 
 En la tabla \ref{tab:nombres} se pueden apreciar información básica de las señales, con el objetivo de mejorar la comprensión de las señales vistas en el simulador.
 
@@ -37,7 +37,7 @@ En la tabla \ref{tab:nombres} se pueden apreciar información básica de las se�
 
 En la imagen 1 se pueden seguir viendo las operaciones que corresponden a los pasos intermedios de multiplicación por los que pasa.
 
-En la imagen 2 se observa que después de realizar las operaciones de multiplicación, resta y desplazamiento se obtiene que en la última operación el registro rResult adquiere el valor de 0x16A0A, equivalente a 0.7071075, lo cual implica que la iteración respecto al valor ini mejoró la aproximación del inverso de la raíz cuadrada pues el valor real es aproximadamente 0.7071067. Lo anterior implica la tendencia de mejorar la precisión siempre y cuando se encuentre un valor inicial cercano al valor meta. 
+En la imagen 2 se observa que después de realizar las operaciones de multiplicación, resta y desplazamiento se obtiene que en la última operación el registro rResult adquiere el valor de 0x16A0A, equivalente a 0.7071075, lo cual implica que la iteración respecto al valor inicial mejoró la aproximación del inverso de la raíz cuadrada pues el valor real es aproximadamente 0.7071067. Lo anterior implica la tendencia de mejorar la precisión siempre y cuando se encuentre un valor inicial cercano al valor meta. 
 
 \begin{figure}
 	\includegraphics[width=1\linewidth, height=2.5cm]{images/Selection_011}
